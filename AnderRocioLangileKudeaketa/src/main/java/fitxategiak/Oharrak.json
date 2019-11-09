@@ -1,0 +1,62 @@
+[
+  {
+    "oharra": {
+	    "data": "2019-7-3",
+	    "ordua": "10:20:30",
+	    "nori": "Ander",
+	    "nork": "Aitor",
+	    "titulua": "Galdera",
+	    "edukia": "Kaixo zelan zaude?"
+    }
+  },
+  {
+   "oharra": {
+	    "data": "2019-7-3",
+	    "ordua": "10:20:50",
+	    "nori": "Aitor",
+	    "nork": "Ander",
+	    "titulua": "Erantzuna",
+	    "edukia": "Ni ondo eta zu?"
+	}
+  },
+  {
+	"oharra": {
+	    "data": "2019-7-3",
+	    "ordua": "10:21:00",
+	    "nori": "Ander",
+	    "nork": "Aitor",
+	    "titulua": "Erantzuna 2",
+	    "edukia": "Ni kili-kolo."
+    } 
+  },
+  {
+    "oharra": {
+	    "data": "2019-7-3",
+	    "ordua": "10:21:30",
+	    "nori": "Aitor",
+	    "nork": "Ander",
+	    "titulua": "Erantzuna 3",
+	    "edukia": "Zer ba?"
+	}	    
+  },
+  {
+	"oharra": {
+	    "data": "2019-7-3",
+	    "ordua": "10:21:50",
+	    "nori": "Ander",
+	    "nork": "Aitor",
+	    "titulua": "Erantzuna 4",
+	    "edukia": "Ez zaidalako programa ondo ibiltzen."
+	 }
+  },
+  {
+    "oharra": {
+	    "data": "2019-7-3",
+	    "ordua": "10:22:30",
+	    "nori": "Aitor",
+	    "nork": "Ander",
+	    "titulua": "Erantzuna 5",
+	    "edukia": "Lasai lan eta lan eta azkenean oso ondo irtengo zaizu eta."
+	}
+  }
+]

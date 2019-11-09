@@ -1,0 +1,22 @@
+[
+  {
+    "LANGILEAK": {
+	    "NAN": "12345678J",
+	    "IZENA": "ANDER",
+	    "ABIZENAK": "FERNANDEZ LAMAS",
+	    "ARDURA": "IRAKASLE",
+	    "ARDURADUNA": "12321213A",
+	    "DEPARTAMENTUAK_DEPART_KOD": "INFORMATIKA"
+		}
+    },
+	{
+	    "LANGILEAK": {
+	    "NAN": "12223344J",
+	    "IZENA": "ROCIO",
+	    "ABIZENAK": "VERA CAMACHO",
+	    "ARDURA": "IRAKASLE",
+	    "ARDURADUNA": "12345678Z",
+	    "DEPARTAMENTUAK_DEPART_KOD": "INFORMATIKA"
+    }
+  }
+]
