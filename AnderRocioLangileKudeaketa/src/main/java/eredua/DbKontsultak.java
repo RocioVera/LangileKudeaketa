@@ -36,7 +36,7 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 		return lista_langilea;
 	}
@@ -58,7 +58,7 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 		
 		return listaDeptKod;
@@ -80,11 +80,11 @@ public class DbKontsultak {
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
 			//konexioa.close(); // DATUBASE konexioa itxi.
-			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Update Message", 0);
+			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Insert Message", 0);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Update Message", 0);
+			//System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Insert Message", 0);
 
 		}
 
@@ -106,11 +106,13 @@ public class DbKontsultak {
 				s.executeUpdate();
 			}
 			s.close(); // PREPAREDSTATEMENT itxi
+			JOptionPane.showMessageDialog(null, "Fitxeroa ondo gehitu da", "SQL Insert Message", 0);
+
 			//konexioa.close(); // DATUBASE konexioa itxi.
 
 		} catch (Exception e) {
-			
-			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Fitxeroa ez da gehitu", "SQL Insert Message", 0);
+			//System.out.println(e.getMessage());
 		}
 
 	}
@@ -125,9 +127,10 @@ public class DbKontsultak {
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
 			//konexioa.close(); // DATUBASE konexioa itxi.
+			JOptionPane.showMessageDialog(null, "Langilea ondo ezabatu da", "SQL Delete Message", 0);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Langilea ez da ondo ezabatu", "SQL Delete Message", 0);
 		}
 
 	}
@@ -149,9 +152,13 @@ public class DbKontsultak {
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
 			//konexioa.close(); // DATUBASE konexioa itxi.
+			JOptionPane.showMessageDialog(null, "Langilea ondo aldatu da", "SQL Update Message", 0);
+
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Update Message", 0);
+
 		}
 
 	}

@@ -79,7 +79,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char letraIzena = e.getKeyChar();
 				String cadena = letraIzena + "";
-				if (txtIzena.getText().length() > 45 || !cadena.matches("[a-zA-Z ]")) {
+				if (txtIzena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
 					e.consume(); // ez du godetzen
 					logger.info("Langilea aldatzerakoan izena lekuan: " + e +" sartu du.");
 				}
@@ -103,7 +103,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char letraAbizena = e.getKeyChar();
 				String cadena = letraAbizena + "";
-				if (txtAbizena.getText().length() > 45 || !cadena.matches("[a-zA-Z ]")) {
+				if (txtAbizena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
 					e.consume(); // ez du godetzen
 					logger.info("Langilea aldatzerakoan abizena lekuan: " + e +" sartu du.");
 				}
