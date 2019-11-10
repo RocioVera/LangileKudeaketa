@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MetodoakLeihoAldaketa {
 	public static ArrayList<Langilea> lista_langileak; //bariable globala
-	
+	public static ArrayList<Departamentua> lista_departamentuak; //bariable globala
+
 	public static void lehenengoLeihoa() {
 		Leiho1OngiEtorria Leiho1 = new Leiho1OngiEtorria();
 		Leiho1.setVisible(true);
@@ -20,12 +21,13 @@ public class MetodoakLeihoAldaketa {
 	}
 	
 	public static void bigarrenLeihoaDept() {
+		lista_departamentuak = kontrolatzailea.MetodoakBBDD.deptTaulaIrakurri();
 		Leiho2DeptKudeaketa Leiho2 = new Leiho2DeptKudeaketa();
 		Leiho2.setVisible(true);
 	}
 	
 	public static void bigarrenLeihoaLang() {
-		lista_langileak = MetodoakBBDD.langileTaulaIrakurri();
+		lista_langileak = kontrolatzailea.MetodoakBBDD.langileTaulaIrakurri();
 		Leiho2LangileKudeaketa Leiho2 = new Leiho2LangileKudeaketa();
 		Leiho2.setVisible(true);
 	}

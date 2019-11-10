@@ -157,7 +157,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 		jcbDeptKod = new JComboBox();
 		jcbDeptKod.setFont(new Font("Dialog", Font.PLAIN, 16));
 		jcbDeptKod.setForeground(Color.BLACK);
-		jcbDeptKod.setBounds(41, 288, 159, 33);
+		jcbDeptKod.setBounds(41, 288, 228, 33);
 		deptKod=MetodoakBBDD.departamentuKodeakAtera();
 		/* DEPARTAMENTU KODEAK JARRI BEHAR DIRA, EZ froga */
 		for (int i = 0; i < deptKod.size(); i++) {
@@ -170,7 +170,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 		jcbArdura = new JComboBox();
 		jcbArdura.setForeground(Color.BLACK);
 		jcbArdura.setFont(new Font("Dialog", Font.PLAIN, 16));
-		jcbArdura.setBounds(41, 358, 159, 33);
+		jcbArdura.setBounds(41, 358, 228, 33);
 		for (int i = 0; i < ardura.size(); i++) {
 			jcbArdura.addItem(ardura.get(i));
 		}
@@ -236,7 +236,8 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 						&& (txtArduraduna.getText().matches("\\d{8}+[A-Z]{1}") || txtArduraduna.getText().matches("") ) && !txtAbizena.getText().matches("[a-zA-Z ]")) {
 					kontrolatzailea.MetodoakBBDD.langileTaulaAldatu(langile);
 					JOptionPane.showMessageDialog(null, "Lerroa ondo aldatu da", "SQL Update Message", 0);
-					dispose();}
+					dispose();
+				}
 			}
 		});
 		btnGorde.setFont(new Font("Dialog", Font.BOLD, 16));

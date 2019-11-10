@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import org.apache.log4j.Logger;
 
+import eredua.Departamentua;
 import eredua.Langilea;
 import kontrolatzailea.Metodoak;
 import kontrolatzailea.MetodoakBBDD;
@@ -28,11 +29,12 @@ import kontrolatzailea.MetodoakLeihoAldaketa;
 public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblDepartKod, lblIzena, lblKokapena, lblEraikuntzaZbk, lblIrakKop, lblDepartamentuDatuak,
-			lblKokapena_1;
+			lblKokapena_1, lblBeteIzena, lblBeteIrakKop;
 	private JTextField txtIzena, txtIrakKop;
 	private JButton btnKargatuFitxategia, btnEzeztatu, btnGorde, btnTxostenakSortu;
-	private JComboBox jcbKokapena, jcbDeptKod, jcbEraikuntzaZbk;
+	private JComboBox jcbKokapena, jcbEraikuntzaZbk;
 	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
+	private JTextField txtDeptKod;
 
 	public Leiho3DeptKudeaketa_Gehitu() {
 		// panelaren propietateak
@@ -56,22 +58,11 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		lblDepartKod.setBounds(20, 60, 233, 21);
 		getContentPane().add(lblDepartKod);
 
-		ArrayList<String> froga = new ArrayList<String>();
-		froga.add("aaa");
-		froga.add("bbb");
-		froga.add("ccc");
-		froga.add("ddd");
-		froga.add("eee");
-
-		jcbDeptKod = new JComboBox();
-		jcbDeptKod.setFont(new Font("Dialog", Font.PLAIN, 16));
-		jcbDeptKod.setForeground(Color.BLACK);
-		jcbDeptKod.setBounds(258, 60, 124, 27);
-		// DEPARTAMENTU KODEAK JARRI BEHAR DIRA, EZ froga /
-		for (int i = 0; i < froga.size(); i++)
-			jcbDeptKod.addItem(froga.get(i));
-		jcbDeptKod.setSelectedIndex(0);
-		getContentPane().add(jcbDeptKod);
+		txtDeptKod = new JTextField();
+		txtDeptKod.setColumns(10);
+		txtDeptKod.setBounds(258, 59, 221, 27);
+		txtDeptKod.setText("");
+		getContentPane().add(txtDeptKod);
 
 		lblIzena = new JLabel("Izena:");
 		lblIzena.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -82,7 +73,8 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 
 		txtIzena = new JTextField();
 		txtIzena.setColumns(10);
-		txtIzena.setBounds(258, 118, 124, 27);
+		txtIzena.setText("");
+		txtIzena.setBounds(258, 118, 221, 27);
 		txtIzena.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char letraIzena = e.getKeyChar();
@@ -91,7 +83,6 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 					e.consume(); // ez du godetzen
 					logger.info("Departamentu izena lekuan: " + e + " sartu du.");
 				}
-
 			}
 		});
 		getContentPane().add(txtIzena);
@@ -110,15 +101,15 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		getContentPane().add(lblKokapena);
 
 		jcbKokapena = new JComboBox();
+		jcbEraikuntzaZbk = new JComboBox(); //sortu gehitu baino lehen
 		jcbKokapena.setFont(new Font("Dialog", Font.PLAIN, 14));
 		jcbKokapena.setForeground(Color.BLACK);
 		jcbKokapena.setBounds(258, 212, 205, 33);
 		jcbKokapena.addItem("ELORRIETA");
 		jcbKokapena.addItem("ERREKA-MARI");
-		jcbKokapena.setSelectedIndex(0);
 		jcbKokapena.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jcbEraikuntzaZbk.removeAllItems();
+				jcbEraikuntzaZbk.removeAllItems();	
 				if (jcbKokapena.getSelectedItem().equals("ELORRIETA")) {
 					jcbEraikuntzaZbk.addItem("1");
 					jcbEraikuntzaZbk.addItem("2");
@@ -130,10 +121,11 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 					jcbEraikuntzaZbk.addItem("7");
 					jcbEraikuntzaZbk.addItem("8");
 				}
-
 			}
 		});
+		jcbKokapena.setSelectedIndex(0);
 		getContentPane().add(jcbKokapena);
+
 
 		lblEraikuntzaZbk = new JLabel("Eraikuntza zenbakia:");
 		lblEraikuntzaZbk.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -142,7 +134,6 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		lblEraikuntzaZbk.setBounds(20, 298, 233, 21);
 		getContentPane().add(lblEraikuntzaZbk);
 
-		jcbEraikuntzaZbk = new JComboBox();
 		jcbEraikuntzaZbk.setForeground(Color.BLACK);
 		jcbEraikuntzaZbk.setFont(new Font("Dialog", Font.PLAIN, 14));
 		jcbEraikuntzaZbk.setBounds(258, 293, 64, 33);
@@ -153,9 +144,9 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		jcbEraikuntzaZbk.addItem("5");
 		jcbEraikuntzaZbk.addItem("6");
 		jcbEraikuntzaZbk.setSelectedIndex(0);
-
 		getContentPane().add(jcbEraikuntzaZbk);
 
+		
 		lblIrakKop = new JLabel("Irakasle kopurua:");
 		lblIrakKop.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblIrakKop.setForeground(Color.BLACK);
@@ -165,7 +156,8 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 
 		txtIrakKop = new JTextField();
 		txtIrakKop.setColumns(10);
-		txtIrakKop.setBounds(258, 383, 124, 27);
+		txtIrakKop.setBounds(258, 383, 221, 27);
+		txtIrakKop.setText("");
 		txtIrakKop.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char letraIrakKop = e.getKeyChar();
@@ -179,13 +171,27 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		});
 		getContentPane().add(txtIrakKop);
 
+		lblBeteIzena = new JLabel("* Bete");
+		lblBeteIzena.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblBeteIzena.setForeground(Color.RED);
+		lblBeteIzena.setBounds(491, 122, 73, 16);
+		lblBeteIzena.setVisible(false);
+		getContentPane().add(lblBeteIzena);
+
+		lblBeteIrakKop = new JLabel("* Bete");
+		lblBeteIrakKop.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblBeteIrakKop.setForeground(Color.RED);
+		lblBeteIrakKop.setBounds(491, 389, 73, 16);
+		lblBeteIrakKop.setVisible(false);
+		getContentPane().add(lblBeteIrakKop);
+
 		// botoiak
 		btnEzeztatu = new JButton("Ezeztatu");
 		btnEzeztatu.setFont(new Font("Dialog", Font.BOLD, 16));
 		btnEzeztatu.setForeground(Color.BLACK);
 		btnEzeztatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MetodoakLeihoAldaketa.lehenengoLeihoa();
+				dispose();
 			}
 		});
 		btnEzeztatu.setBounds(440, 490, 124, 32);
@@ -206,8 +212,25 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		btnGorde = new JButton("Gorde");
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!txtIzena.getText().matches("[a-zA-Z]") && txtIrakKop.getText().matches("[0-9]{1,3}"))
-					System.out.println("baaaaiiii"); // llamar metodo subir datos
+				// lblBeteIzena
+				if (txtIzena.getText().equals(""))
+					lblBeteIzena.setVisible(true);
+				else
+					lblBeteIzena.setVisible(false);
+
+				if (txtIrakKop.getText().equals(""))
+					lblBeteIrakKop.setVisible(true);
+				else
+					lblBeteIrakKop.setVisible(false);
+
+				if (!txtIzena.getText().matches("[a-zA-Z]") && txtIrakKop.getText().matches("[0-9]{1,3}")) {
+					Departamentua departamentua = new Departamentua(txtDeptKod.getText() + "", txtIzena.getText() + "",
+							jcbKokapena.getSelectedItem() + "", jcbEraikuntzaZbk.getSelectedItem() + "",
+							txtIrakKop.getText() + "");
+
+					kontrolatzailea.MetodoakBBDD.deptTaulaIdatzi(departamentua);
+					dispose();
+				}
 			}
 		});
 		btnGorde.setForeground(Color.BLACK);

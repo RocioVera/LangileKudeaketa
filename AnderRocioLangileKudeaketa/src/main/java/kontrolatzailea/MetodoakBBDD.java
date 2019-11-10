@@ -2,6 +2,7 @@ package kontrolatzailea;
 
 import java.util.ArrayList;
 
+import eredua.Departamentua;
 import eredua.Langilea;
 
 public class MetodoakBBDD {
@@ -28,5 +29,24 @@ public class MetodoakBBDD {
 	//fitxeroentzako datuak
 	public static void multiLangileTaulaIdatzi() {
 		eredua.DbKontsultak.multiLangileTaulaIdatzi(kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak);
+	}
+	
+	
+	//DEPARTAMENTUAK
+	public static ArrayList<Departamentua> deptTaulaIrakurri() {
+		return eredua.DbKontsultak.deptTaulaIrakurri();
+	}
+	
+	
+	public static void deptTaulaIdatzi(Departamentua dept) {
+		eredua.DbKontsultak.deptTaulaIdatzi(dept);
+	}
+	
+	public static void deptTaulaEzabatu(Departamentua dept) {
+		eredua.DbKontsultak.deptTaulaEzabatu(dept);
+	}
+	
+	public static void deptTaulaAldatu(Departamentua dept) {
+		eredua.DbKontsultak.deptTaulaAldatu(dept);
 	}
 }
