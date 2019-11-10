@@ -478,7 +478,7 @@ public class FitxKudeaketaLangilea {
 	}
 
 	public static void idatziLangileakPDF(ArrayList<Langilea> lista_langileak) {
-		 try {
+		/* try {
 	            // Nombre del archivo FO
 	            File xsltFile = new File("src/main/java/fitxategiakSortuta/reporte.xsl");
 	            //Archivo XML que proveerá de datos
@@ -498,7 +498,34 @@ public class FitxKudeaketaLangilea {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+	*/
+		/*try {
+			Document document = new Document();
+			String FILE_NAME = "src/main/java/fitxategiakSortuta/LangileakFitx.csv";
+			PdfWriter.getInstance((com.itextpdf.text.Document) document, new FileOutputStream(new File(FILE_NAME)));
+			//document.open();
+			Paragraph paragraphHello = new Paragraph();
 
+			for (int i = 0; i < lista_langileak.size(); i++) {
+				paragraphHello = new Paragraph();
+				paragraphHello.add(lista_langileak.get(i).getNan() + ",\"" + lista_langileak.get(i).getIzena() + "\",\""
+						+ lista_langileak.get(i).getAbizenak() + "\",\"" + lista_langileak.get(i).getArdura() + "\",\""
+						+ lista_langileak.get(i).getArduraduna() + "\",\""
+						+ lista_langileak.get(i).getDepartamentu_kod() + "\"");
+				document.add(paragraphHello);
+			}
+
+			Font f = new Font();
+			f.setFamily(FontFamily.COURIER.name());
+			f.setStyle(Font.BOLDITALIC);
+			f.setSize(8);
+			document.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+		
 
 	}
 
