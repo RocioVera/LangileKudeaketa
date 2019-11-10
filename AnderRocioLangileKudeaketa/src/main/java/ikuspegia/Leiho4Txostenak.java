@@ -15,6 +15,7 @@ import javax.swing.ScrollPaneConstants;
 
 import eredua.Departamentua;
 import eredua.Langilea;
+import kontrolatzailea.MetodoakFitxIrakurri;
 
 public class Leiho4Txostenak extends JFrame {
 
@@ -69,7 +70,7 @@ public class Leiho4Txostenak extends JFrame {
 		btnFitxeroaSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// SORTU
-				JOptionPane.showMessageDialog(null, "Fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+				MetodoakFitxIrakurri.idatziXMLMet(ateraLangileak);
 			}
 		});
 		btnFitxeroaSortu.setBounds(10, 483, 128, 23);

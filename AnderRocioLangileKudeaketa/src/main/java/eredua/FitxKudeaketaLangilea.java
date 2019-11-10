@@ -212,16 +212,18 @@ public class FitxKudeaketaLangilea {
 
 				raiz.appendChild(row);
 			}
+			JOptionPane.showMessageDialog(null, "Fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 
 		}
 
 		ficheroXML.normalizeDocument();
 
 		Source source = new DOMSource(ficheroXML);
-		Result result = new StreamResult(new File(""));
+		Result result = new StreamResult(new File("src/main/java/fitxategiak/LangileakFitx.xml"));
 		Transformer transformer = null;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
