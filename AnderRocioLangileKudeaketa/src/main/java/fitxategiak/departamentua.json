@@ -1,0 +1,20 @@
+[
+  {
+    "DEPARTAMENTUAK": {
+	    "DEPART_KOD": "DEPT1JSON",
+	    "IZENA": "FROGA1JSON",
+	    "KOKAPENA": "ELORRIETA",
+	    "ERAIKUNTZA_ZBK": "5",
+	    "IRAKASLE_KOP": "11"
+		}
+    },
+	{
+	    "DEPARTAMENTUAK": {
+	    "DEPART_KOD": "DEPT2JSON",
+	    "IZENA": "FROGA2JSON",
+	    "KOKAPENA": "ERREKA-MARI",
+	    "ERAIKUNTZA_ZBK": "7",
+	    "IRAKASLE_KOP": "9"
+    }
+  }
+]
