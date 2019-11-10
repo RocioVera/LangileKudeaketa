@@ -48,4 +48,8 @@ public class MetodoakBBDD {
 	public static void deptTaulaAldatu(Departamentua dept) {
 		eredua.DbKontsultak.deptTaulaAldatu(dept);
 	}
+	
+	public static void multiDeptTaulaIdatzi() {
+		eredua.DbKontsultak.multiDeptTaulaIdatzi(kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak);
+	}
 }

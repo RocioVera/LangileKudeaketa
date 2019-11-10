@@ -5,7 +5,6 @@ import ikuspegia.*;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-
 public class MetodoakLeihoAldaketa {
 	public static ArrayList<Langilea> lista_langileak; //bariable globala
 	public static ArrayList<Departamentua> lista_departamentuak; //bariable globala
@@ -13,11 +12,6 @@ public class MetodoakLeihoAldaketa {
 	public static void lehenengoLeihoa() {
 		Leiho1OngiEtorria Leiho1 = new Leiho1OngiEtorria();
 		Leiho1.setVisible(true);
-		
-		//lista_langileak = eredua.DbKontsultak.langileTaulaIrakurri();
-		//MetodoakLeihoAldaketa.frogaLeihoa();
-		
-		
 	}
 	
 	public static void bigarrenLeihoaDept() {
@@ -57,6 +51,11 @@ public class MetodoakLeihoAldaketa {
 	}
 	public static void bostgarrenLangLeihoa() {
 		Leiho5LangileFitxKargatu Leiho5 = new Leiho5LangileFitxKargatu();
+		Leiho5.setVisible(true);
+	}
+	
+	public static void bostgarrenDeptLeihoa() {
+		Leiho5DeptFitxKargatu Leiho5 = new Leiho5DeptFitxKargatu();
 		Leiho5.setVisible(true);
 	}
 

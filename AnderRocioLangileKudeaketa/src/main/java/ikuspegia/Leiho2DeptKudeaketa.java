@@ -73,7 +73,7 @@ public class Leiho2DeptKudeaketa extends JFrame {
 		btnKargatuFitxategia.setBounds(62, 487, 188, 35);
 		btnKargatuFitxategia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MetodoakLeihoAldaketa.bostgarrenLangLeihoa();
+				MetodoakLeihoAldaketa.bostgarrenDeptLeihoa();
 			}
 		});
 		getContentPane().add(btnKargatuFitxategia);

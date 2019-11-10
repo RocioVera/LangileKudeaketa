@@ -260,6 +260,34 @@ public class DbKontsultak {
 		}
 
 	}
+	
+	public static void multiDeptTaulaIdatzi(ArrayList<Departamentua> lista_dept) {
+		PreparedStatement s = null;
+		Connection konexioa = Konexioa.getKonexioa();
+		try {
+			s = konexioa.prepareStatement(
+					"INSERT INTO `LANGILEAK` (`DEPART_KOD`, `IZENA`, `KOKAPENA`, `ERAIKUNTZA_ZBK`, `IRAKASLE_KOP`)"
+							+ " VALUES(?, ?, ?, ?, ?)");
+			for (Departamentua dept : lista_dept) {
+				s.setString(1, dept.getDepart_kod());
+				s.setString(2, dept.getIzena());
+				s.setString(3, dept.getKokapena());
+				s.setString(4, dept.getEraikuntza_zbk());
+				s.setString(5, dept.getIrakasle_kop());		
+				s.executeUpdate();
+			}
+			s.close(); // PREPAREDSTATEMENT itxi
+			JOptionPane.showMessageDialog(null, "Fitxeroa ondo gehitu da", "SQL Insert Message", 0);
+
+			//konexioa.close(); // DATUBASE konexioa itxi.
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Fitxeroa ez da gehitu", "SQL Insert Message", 0);
+			//System.out.println(e.getMessage());
+		}
+
+	}
+
 
 
 }

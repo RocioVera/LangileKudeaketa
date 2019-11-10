@@ -2,19 +2,33 @@ package kontrolatzailea;
 
 import java.util.ArrayList;
 
+import eredua.Departamentua;
 import eredua.Langilea;
 
 public class MetodoakFitxIrakurri {
-	
+
 	public static ArrayList<Langilea> irakurriLangileakXMLMet(String helbidea) {
-//D:\DAM2\AccesoADatos\git\LangileKudeaketa\LangileKudeaketa\src\fitxategiak\langileak.csv
 		return eredua.FitxKudeaketaLangilea.irakurriLangileakXML(helbidea);
 	}
+
 	public static ArrayList<Langilea> irakurriLangileakCSVMet(String helbidea) {
 		return eredua.FitxKudeaketaLangilea.irakurriLangileakCSV(helbidea);
 	}
-	
+
 	public static ArrayList<Langilea> irakurriLangileakJSONMet(String helbidea) {
+		return eredua.FitxKudeaketaLangilea.irakurriLangileakJSON(helbidea);
+	}
+
+	//DEPARTAMENTUAK
+	public static ArrayList<Departamentua> irakurriDeptXMLMet(String helbidea) {
+		return eredua.FitxKudeaketaLangilea.irakurriDeptXML(helbidea);
+	}
+
+	public static ArrayList<Departamentua> irakurriDeptCSVMet(String helbidea) {
+		return eredua.FitxKudeaketaLangilea.irakurriDeptCSV(helbidea);
+	}
+
+	public static ArrayList<Langilea> irakurriDeptJSONMet(String helbidea) {
 		return eredua.FitxKudeaketaLangilea.irakurriLangileakJSON(helbidea);
 	}
 }
