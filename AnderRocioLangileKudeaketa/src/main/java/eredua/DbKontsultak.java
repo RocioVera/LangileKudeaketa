@@ -223,7 +223,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"DELETE FROM `langileak` WHERE `DEPART_KOD` LIKE ?");
+					"DELETE FROM `departamentuak` WHERE `DEPART_KOD` LIKE ?");
 			s.setString(1, dept.getDepart_kod());
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
@@ -241,7 +241,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"UPDATE `langileak` SET `DEPART_KOD`=?,`IZENA`=?,`KOKAPENA`=?,`ERAIKUNTZA_ZBK`=?,`IRAKASLE_KOP`=? WHERE `DEPART_KOD`= '"+dept.getDepart_kod()+"'");
+					"UPDATE `departamentuak` SET `DEPART_KOD`=?,`IZENA`=?,`KOKAPENA`=?,`ERAIKUNTZA_ZBK`=?,`IRAKASLE_KOP`=? WHERE `DEPART_KOD`= '"+dept.getDepart_kod()+"'");
 			s.setString(1, dept.getDepart_kod());
 			s.setString(2, dept.getIzena());
 			s.setString(3, dept.getKokapena());

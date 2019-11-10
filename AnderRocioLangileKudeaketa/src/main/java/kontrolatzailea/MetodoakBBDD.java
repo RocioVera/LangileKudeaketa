@@ -37,7 +37,6 @@ public class MetodoakBBDD {
 		return eredua.DbKontsultak.deptTaulaIrakurri();
 	}
 	
-	
 	public static void deptTaulaIdatzi(Departamentua dept) {
 		eredua.DbKontsultak.deptTaulaIdatzi(dept);
 	}

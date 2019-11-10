@@ -32,7 +32,7 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 			lblKokapena_1, lblBeteIzena, lblBeteIrakKop;
 	private JTextField txtIzena, txtIrakKop;
 	private JButton btnKargatuFitxategia, btnEzeztatu, btnGorde, btnTxostenakSortu;
-	private JComboBox jcbKokapena, jcbEraikuntzaZbk;
+	private JComboBox<String> jcbKokapena, jcbEraikuntzaZbk;
 	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
 	private JTextField txtDeptKod;
 
