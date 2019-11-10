@@ -257,7 +257,7 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		btnKargatuFitxategia.setForeground(Color.BLACK);
 		btnKargatuFitxategia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MetodoakLeihoAldaketa.bostgarrenLeihoa();
+				MetodoakLeihoAldaketa.bostgarrenLangLeihoa();
 				dispose();
 			}
 		});

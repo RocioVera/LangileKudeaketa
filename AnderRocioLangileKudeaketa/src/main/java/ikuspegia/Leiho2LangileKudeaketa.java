@@ -78,7 +78,7 @@ public class Leiho2LangileKudeaketa extends JFrame {
 		btnKargatuFitxategia.setBounds(62, 487, 188, 35);
 		btnKargatuFitxategia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MetodoakLeihoAldaketa.bostgarrenLeihoa();
+				MetodoakLeihoAldaketa.bostgarrenLangLeihoa();
 			}
 		});
 		getContentPane().add(btnKargatuFitxategia);

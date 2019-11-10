@@ -55,10 +55,9 @@ public class MetodoakLeihoAldaketa {
 		Leiho4Txostenak Leiho4 = new Leiho4Txostenak();
 		Leiho4.setVisible(true);
 	}
-	public static void bostgarrenLeihoa() {
+	public static void bostgarrenLangLeihoa() {
 		Leiho5LangileFitxKargatu Leiho5 = new Leiho5LangileFitxKargatu();
 		Leiho5.setVisible(true);
-		
 	}
 
 	public static void Leiho_segunduak() {
