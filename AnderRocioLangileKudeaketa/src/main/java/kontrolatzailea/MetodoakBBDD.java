@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import eredua.Departamentua;
 import eredua.Langilea;
+import eredua.Oharra;
 
 public class MetodoakBBDD {
 	public static ArrayList<Langilea> langileTaulaIrakurri() {
@@ -52,4 +53,5 @@ public class MetodoakBBDD {
 	public static void multiDeptTaulaIdatzi() {
 		eredua.DbKontsultak.multiDeptTaulaIdatzi(kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak);
 	}
+	
 }

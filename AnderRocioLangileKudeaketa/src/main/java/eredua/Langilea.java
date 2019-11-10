@@ -66,8 +66,8 @@ public class Langilea {
 	//tostring
 	//@Override
 	public String toString() {
-		return "Langilea [nan=" + nan + ", izena=" + izena + ", abizenak=" + abizenak + ", ardura=" + ardura
-				+ ", arduraduna=" + arduraduna + ", departamentu_kod=" + departamentu_kod + "]";
+		return "     Langile nan: " + nan + "\n           Izena: " + izena + "\n           Abizenak: " + abizenak + "\n           " + ardura
+				+ "\n           Arduraduna: " + arduraduna + "\n           Dept kod: " + departamentu_kod + "\n***********************************\n";
 	}
 	
 }
