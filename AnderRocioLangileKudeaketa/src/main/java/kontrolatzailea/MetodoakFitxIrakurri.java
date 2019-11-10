@@ -18,6 +18,11 @@ public class MetodoakFitxIrakurri {
 	public static ArrayList<Langilea> irakurriLangileakJSONMet(String helbidea) {
 		return eredua.FitxKudeaketaLangilea.irakurriLangileakJSON(helbidea);
 	}
+	
+	//FITXEROA SORTU
+	public static void idatziXMLMet(ArrayList<Langilea> lista_langileak) {
+		eredua.FitxKudeaketaLangilea.idatziLangileakXML(lista_langileak);
+	}
 
 	//DEPARTAMENTUAK
 	public static ArrayList<Departamentua> irakurriDeptXMLMet(String helbidea) {

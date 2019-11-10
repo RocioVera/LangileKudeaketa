@@ -163,7 +163,7 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .xml aren amaieran idazten du.
-	public static int idatziLangileakXML(ArrayList<Langilea> lista_langileak, String helbidea) {
+	public static int idatziLangileakXML(ArrayList<Langilea> lista_langileak) {
 		int idatzita = 0;
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -221,7 +221,7 @@ public class FitxKudeaketaLangilea {
 		ficheroXML.normalizeDocument();
 
 		Source source = new DOMSource(ficheroXML);
-		Result result = new StreamResult(new File(helbidea));
+		Result result = new StreamResult(new File(""));
 		Transformer transformer = null;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
