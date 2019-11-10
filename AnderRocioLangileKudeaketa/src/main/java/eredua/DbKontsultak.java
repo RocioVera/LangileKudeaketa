@@ -156,7 +156,7 @@ public class DbKontsultak {
 
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		//	System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Ez da aldatu", "SQL Update Message", 0);
 
 		}
@@ -254,7 +254,7 @@ public class DbKontsultak {
 			JOptionPane.showMessageDialog(null, "Departamentua ondo aldatu da", "SQL Update Message", 0);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Ez da aldatu", "SQL Update Message", 0);
 
 		}
