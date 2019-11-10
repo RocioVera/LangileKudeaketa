@@ -52,4 +52,5 @@ public class MetodoakBBDD {
 	public static void multiDeptTaulaIdatzi() {
 		eredua.DbKontsultak.multiDeptTaulaIdatzi(kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak);
 	}
+	
 }

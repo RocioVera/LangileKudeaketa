@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -22,7 +23,15 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+//
+//import org.apache.fop.apps.FOUserAgent;
+//import org.apache.fop.apps.FopFactory;
+//import org.apache.fop.apps.MimeConstants;
+//import org.apache.fop.tools.anttasks.Fop;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,12 +39,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
+//
+//import com.itextpdf.text.Font;
+//import com.itextpdf.text.Font.FontFamily;
+//import com.itextpdf.text.Paragraph;
+//import com.itextpdf.text.pdf.PdfWriter;
+//import com.itextpdf.text.pdf.codec.Base64.OutputStream;
+//import com.itextpdf.text.pdf.PdfDocument;
+//import com.itextpdf.text.DocumentException;
 
 public class FitxKudeaketaLangilea {
 
@@ -87,9 +98,8 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .csv aren amaieran idazten du.
-	public static int idatziLangileakCSV(ArrayList<Langilea> lista_langileak, String helbidea) {
-		int idatzita = 0;
-		File d = new File(helbidea);
+	public static void idatziLangileakCSV(ArrayList<Langilea> lista_langileak) {
+		File d = new File("src/main/java/fitxategiakSortuta/LangileakFitx.csv");
 		FileWriter fw;
 		BufferedWriter bw;
 		try {
@@ -103,11 +113,13 @@ public class FitxKudeaketaLangilea {
 						+ lista_langileak.get(i).getDepartamentu_kod() + "\"");
 				bw.flush(); // csv-an idatzitakoa gortzeko
 			}
-			idatzita = 1;
+			JOptionPane.showMessageDialog(null, "CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+
 		} catch (IOException e) {
 			// e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+
 		}
-		return idatzita;
 	}
 
 	// .xml an dauden lerroak arraylist batean sartu
@@ -162,9 +174,7 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .xml aren amaieran idazten du.
-	public static int idatziLangileakXML(ArrayList<Langilea> lista_langileak, String helbidea) {
-		int idatzita = 0;
-
+	public static void idatziLangileakXML(ArrayList<Langilea> lista_langileak) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		try {
@@ -187,6 +197,11 @@ public class FitxKudeaketaLangilea {
 				Text nantext = ficheroXML.createTextNode(lista_langileak.get(i).getNan() + "\n");
 				nan.appendChild(nantext);
 				row.appendChild(nan);
+				
+				Element izena = ficheroXML.createElement("IZENA");
+				Text izenatext = ficheroXML.createTextNode(lista_langileak.get(i).getAbizenak() + "\n");
+				izena.appendChild(izenatext);
+				row.appendChild(izena);
 
 				Element abizenak = ficheroXML.createElement("ABIZENAK");
 				Text abizenaktext = ficheroXML.createTextNode(lista_langileak.get(i).getAbizenak() + "\n");
@@ -214,25 +229,25 @@ public class FitxKudeaketaLangilea {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 
 		ficheroXML.normalizeDocument();
 
 		Source source = new DOMSource(ficheroXML);
-		Result result = new StreamResult(new File(helbidea));
+		Result result = new StreamResult(new File("src/main/java/fitxategiakSortuta/LangileakFitx.xml"));
 		Transformer transformer = null;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			idatzita = 1;
+			JOptionPane.showMessageDialog(null, "XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerFactoryConfigurationError e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		}
 
-		return idatzita;
 	}
 
 	// .json an dauden lerroak arraylist batean sartu
@@ -308,6 +323,7 @@ public class FitxKudeaketaLangilea {
 
 
 	// .xml aren amaieran idazten du.
+
 	public static int idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
 		int idatzita = 0;
 
@@ -392,6 +408,8 @@ public class FitxKudeaketaLangilea {
 
 	// DEPARTAMENTUAK
 	// .csv an dauden lerroak arraylist batean sartu
+
+	// DEPARTAMENTUAK
 	public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
 		// bariableak
 		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
@@ -474,6 +492,58 @@ public class FitxKudeaketaLangilea {
 			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
 		}
 		return lista_dept;
+	}
+
+	public static void idatziLangileakPDF(ArrayList<Langilea> lista_langileak) {
+		/* try {
+	            // Nombre del archivo FO
+	            File xsltFile = new File("src/main/java/fitxategiakSortuta/reporte.xsl");
+	            //Archivo XML que proveerá de datos
+	            StreamSource xmlSource = new StreamSource(new File("src/main/java/fitxategiakSortuta/LangileakFitx.xml"));
+	            FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+	            FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+	            FileOutputStream out;
+	            //Archivo PDF
+	            out = new FileOutputStream("src/main/java/fitxategiakSortuta/LangileakFitx.pdf");
+	            org.apache.fop.apps.Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+	            TransformerFactory factory = TransformerFactory.newInstance();
+	            Transformer transformer = factory.newTransformer(new StreamSource(xsltFile));
+	            Result res = new SAXResult(fop.getDefaultHandler());
+	            transformer.transform(xmlSource, res);
+	            out.close();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	*/
+		/*try {
+			Document document = new Document();
+			String FILE_NAME = "src/main/java/fitxategiakSortuta/LangileakFitx.csv";
+			PdfWriter.getInstance((com.itextpdf.text.Document) document, new FileOutputStream(new File(FILE_NAME)));
+			//document.open();
+			Paragraph paragraphHello = new Paragraph();
+
+			for (int i = 0; i < lista_langileak.size(); i++) {
+				paragraphHello = new Paragraph();
+				paragraphHello.add(lista_langileak.get(i).getNan() + ",\"" + lista_langileak.get(i).getIzena() + "\",\""
+						+ lista_langileak.get(i).getAbizenak() + "\",\"" + lista_langileak.get(i).getArdura() + "\",\""
+						+ lista_langileak.get(i).getArduraduna() + "\",\""
+						+ lista_langileak.get(i).getDepartamentu_kod() + "\"");
+				document.add(paragraphHello);
+			}
+
+			Font f = new Font();
+			f.setFamily(FontFamily.COURIER.name());
+			f.setStyle(Font.BOLDITALIC);
+			f.setSize(8);
+			document.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+		
+
 	}
 
 }

@@ -56,8 +56,8 @@ public class Departamentua {
 	//tostring
 	//@Override
 	public String toString() {
-		return "Departamentua [depart_kod=" + depart_kod + ", izena=" + izena + ", kokapena=" + kokapena
-				+ ", eraikuntza_zbk=" + eraikuntza_zbk + ", irakasle_kop=" + irakasle_kop + "]";
+		return "     Dept kod: " + depart_kod + "\n           Izena: " + izena + "\n           Kokapena: " + kokapena
+				+ "\n           eraikuntza zbk: " + eraikuntza_zbk + "\n           irakasle kopurua: " + irakasle_kop + "\n*********************************************************\n";
 	}
 
 }
