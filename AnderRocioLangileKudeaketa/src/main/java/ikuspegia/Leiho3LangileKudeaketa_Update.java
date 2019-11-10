@@ -235,7 +235,6 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 				if (txtNan.getText().matches("\\d{8}+[A-Z]{1}") && !txtIzena.getText().matches("[a-zA-Z ]")
 						&& (txtArduraduna.getText().matches("\\d{8}+[A-Z]{1}") || txtArduraduna.getText().matches("") ) && !txtAbizena.getText().matches("[a-zA-Z ]")) {
 					kontrolatzailea.MetodoakBBDD.langileTaulaAldatu(langile);
-					JOptionPane.showMessageDialog(null, "Lerroa ondo aldatu da", "SQL Update Message", 0);
 					dispose();
 				}
 			}
