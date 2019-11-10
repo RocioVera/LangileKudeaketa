@@ -50,23 +50,16 @@ public class MetodoakLeihoAldaketa {
 		Leiho3DeptKudeaketa_Update Leiho3 = new Leiho3DeptKudeaketa_Update(departamentua);
 		Leiho3.setVisible(true);
 	}
-
-	/*public static void hirugarrenLeihoaEzabatuAldatu() {
-		Leiho2LangileKudeaketa Leiho3 = new Leiho2LangileKudeaketa();
-		Leiho3.setVisible(true);
-	}*/
 	
 	public static void laugarrenLeihoa() {
 		Leiho4Txostenak Leiho4 = new Leiho4Txostenak();
 		Leiho4.setVisible(true);
 	}
 	public static void bostgarrenLeihoa() {
-		Leiho5FitxKargatu Leiho5 = new Leiho5FitxKargatu();
+		Leiho5LangileFitxKargatu Leiho5 = new Leiho5LangileFitxKargatu();
 		Leiho5.setVisible(true);
 		
 	}
-
-	// Leiho6-ko metodoak
 
 	public static void Leiho_segunduak() {
 		for (int i = 1; i <= 5; i++) {

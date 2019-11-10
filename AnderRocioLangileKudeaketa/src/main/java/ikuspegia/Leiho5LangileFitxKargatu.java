@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import kontrolatzailea.MetodoakLeihoAldaketa;
 import javax.swing.DefaultComboBoxModel;
 
-public class Leiho5FitxKargatu extends JFrame {
+public class Leiho5LangileFitxKargatu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtHelbidea;
 	private JLabel lblMenuNagusia, lblMota, lblRuta;
@@ -28,11 +28,11 @@ public class Leiho5FitxKargatu extends JFrame {
 	private JComboBox comboBox;
 	private File fitxategia;
 
-	public Leiho5FitxKargatu() {
+	public Leiho5LangileFitxKargatu() {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
-		this.setTitle("6.taldearen langileen kudeaketa");
+		this.setTitle("6.taldearen langileen kudeaketaren fitxategia gehitu");
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		
