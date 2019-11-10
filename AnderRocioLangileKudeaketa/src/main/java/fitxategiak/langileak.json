@@ -1,22 +1,43 @@
 [
+  {"langilea":{
+    "NAN": "13245678Z",
+    "IZENA": "Paco",
+    "ABIZENAK": "Gonzalez",
+    "ARDURA": "Irakaslea",
+    "ARDURADUNA": "20233954A",
+    "DEPARTAMENTUAK_DEPART_KOD": "informatika"
+  }
+  },
+  {"langilea":{
+    "NAN": "20233954A",
+    "IZENA": "Ander",
+    "ABIZENAK": "Fernandez",
+    "ARDURA": "Depart. Burua",
+    "ARDURADUNA": "",
+    "DEPARTAMENTUAK_DEPART_KOD": "informatika"
+  }},
+  {"langilea":{
+    "NAN": "20213454C",
+    "IZENA": "Manolo",
+    "ABIZENAK": "Fadura",
+    "ARDURA": "Enplegatua",
+    "ARDURADUNA": "",
+    "DEPARTAMENTUAK_DEPART_KOD": "kimika"
+  },
   {
-    "LANGILEAK": {
-	    "NAN": "12345678J",
-	    "IZENA": "ANDER",
-	    "ABIZENAK": "FERNANDEZ LAMAS",
-	    "ARDURA": "IRAKASLE",
-	    "ARDURADUNA": "12321213A",
-	    "DEPARTAMENTUAK_DEPART_KOD": "INFORMATIKA"
-		}
-    },
-	{
-	    "LANGILEAK": {
-	    "NAN": "12223344J",
-	    "IZENA": "ROCIO",
-	    "ABIZENAK": "VERA CAMACHO",
-	    "ARDURA": "IRAKASLE",
-	    "ARDURADUNA": "12345678Z",
-	    "DEPARTAMENTUAK_DEPART_KOD": "INFORMATIKA"
-    }
+    "NAN": "45333954A",
+    "IZENA": "Jorge",
+    "ABIZENAK": "Bravo",
+    "ARDURA": "Irakaslea",
+    "ARDURADUNA": "",
+    "DEPARTAMENTUAK_DEPART_KOD": "informatika"
+  },
+  {
+    "NAN": "21341578E",
+    "IZENA": "Nerea",
+    "ABIZENAK": "Juarez",
+    "ARDURA": "Depart. Burua",
+    "ARDURADUNA": "",
+    "DEPARTAMENTUAK_DEPART_KOD": "kimika"
   }
 ]

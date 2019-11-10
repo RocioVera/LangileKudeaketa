@@ -22,6 +22,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,13 +31,11 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
-/*import org.json.simple.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-*/
 
-import jdk.nashorn.internal.parser.JSONParser;
 
 public class FitxKudeaketaLangilea {
 
@@ -237,62 +236,76 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .json an dauden lerroak arraylist batean sartu
+
 	public static ArrayList<Langilea> irakurriLangileakJSON(String helbidea) {
 		ArrayList<Langilea> lista_langilea = new ArrayList<Langilea>();
 
-		/*
-		 * JSONParser jsonParser = new JSONParser();
-		 * 
-		 * try (FileReader reader = new FileReader(helbidea)) { Object obj =
-		 * jsonParser.parse(reader); JSONArray employeeList = (JSONArray) obj;
-		 * employeeList.forEach(emp -> parseOharrakObject((JSONObject) emp)); } catch
-		 * (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) {
-		 * e.printStackTrace(); } catch (ParseException e) { e.printStackTrace(); }
-		 * 
-		 * /* File fitxeroa = new File(helbidea); DocumentBuilderFactory dbFactory =
-		 * DocumentBuilderFactory.newInstance(); DocumentBuilder dBuilder; Document doc
-		 * = null;
-		 * 
-		 * String nan, izena, abizenak, ardura, arduraduna, departamentu_kod;
-		 * 
-		 * try { dBuilder = dbFactory.newDocumentBuilder(); try { doc =
-		 * dBuilder.parse(fitxeroa); doc.getDocumentElement().normalize(); NodeList
-		 * lista = doc.getElementsByTagName("LANGILEAK");
-		 * 
-		 * for (int temp = 0; temp < lista.getLength(); temp++) { Node nNode =
-		 * lista.item(temp); if (nNode.getNodeType() == Node.ELEMENT_NODE) { Element
-		 * eElement = (Element) nNode; nan =
-		 * eElement.getElementsByTagName("NAN").item(0).getTextContent(); izena =
-		 * eElement.getElementsByTagName("IZENA").item(0).getTextContent(); abizenak =
-		 * eElement.getElementsByTagName("ABIZENAK").item(0).getTextContent(); ardura =
-		 * eElement.getElementsByTagName("ARDURA").item(0).getTextContent(); arduraduna
-		 * = eElement.getElementsByTagName("ARDURADUNA").item(0).getTextContent();
-		 * departamentu_kod =
-		 * eElement.getElementsByTagName("DEPARTAMENTUAK_DEPART_KOD").item(0).
-		 * getTextContent(); Langilea langilea = new Langilea(nan, izena, abizenak,
-		 * ardura, arduraduna, departamentu_kod); lista_langilea.add(langilea); } } }
-		 * catch (SAXException e) { e.printStackTrace(); } catch (IOException e) {
-		 * e.printStackTrace(); } } catch (ParserConfigurationException e) {
-		 * e.printStackTrace(); }
-		 */
 
-		return lista_langilea;
+		JSONParser parser = new JSONParser();
+		
+		try { 
+			FileReader reader = new FileReader(helbidea);
+			Object obj = parser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp -> parseOharrakObject((JSONObject) emp));
+
+		}catch
+		(FileNotFoundException e) { e.printStackTrace();
+
+		}catch (IOException e) {
+			e.printStackTrace(); } catch (ParseException e) { e.printStackTrace(); }
+
+		File fitxeroa = new File(helbidea); DocumentBuilderFactory dbFactory =
+				DocumentBuilderFactory.newInstance(); DocumentBuilder dBuilder; Document doc
+				= null;
+
+				String nan, izena, abizenak, ardura, arduraduna, departamentu_kod;
+
+				try { dBuilder = dbFactory.newDocumentBuilder(); try { doc =
+						dBuilder.parse(fitxeroa); doc.getDocumentElement().normalize(); NodeList
+						lista = doc.getElementsByTagName("");
+
+						for (int temp = 0; temp < lista.getLength(); temp++) 
+						{ Node nNode =lista.item(temp); 
+						
+							if (nNode.getNodeType() == Node.ELEMENT_NODE) { 
+								Element eElement = (Element) nNode;
+								
+								nan = eElement.getElementsByTagName("NAN").item(0).getTextContent();
+								izena =	eElement.getElementsByTagName("IZENA").item(0).getTextContent();
+								abizenak =	eElement.getElementsByTagName("ABIZENAK").item(0).getTextContent(); 
+								ardura = eElement.getElementsByTagName("ARDURA").item(0).getTextContent(); 
+								arduraduna= eElement.getElementsByTagName("ARDURADUNA").item(0).getTextContent();
+								departamentu_kod =	eElement.getElementsByTagName("DEPARTAMENTUAK_DEPART_KOD").item(0).getTextContent(); 
+								
+								Langilea langilea = new Langilea(nan, izena, abizenak,ardura, arduraduna, departamentu_kod);
+								lista_langilea.add(langilea);
+							}
+						}
+				}
+				catch (SAXException e) { e.printStackTrace(); } catch (IOException e) {
+					e.printStackTrace(); } } catch (ParserConfigurationException e) {
+						e.printStackTrace(); }
+
+				return lista_langilea;
 	}
-	/*
-	 * private static void parseOharrakObject(JSONObject employee) { JSONObject
-	 * oharraObject = (JSONObject) employee.get("LANGILEAK");
-	 * 
-	 * String nan = (String) oharraObject.get("NAN"); String izena = (String)
-	 * oharraObject.get("IZENA"); String abizenak = (String)
-	 * oharraObject.get("ABIZENAK"); String ardura = (String)
-	 * oharraObject.get("ARDURA"); String arduraduna = (String)
-	 * oharraObject.get("ARDURADUNA"); String depart_kod = (String)
-	 * oharraObject.get("DEPARTAMENTUAK_DEPART_KOD");
-	 * 
-	 * Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna,
-	 * depart_kod);
-	 * kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.add(langilea); }
-	 */
+
+	private static void parseOharrakObject(JSONObject langile) { 
+	
+		JSONObject	oharraObject = langile;
+
+		String nan = oharraObject.get("NAN").toString();
+		String izena = oharraObject.get("IZENA").toString(); 
+		String abizenak = oharraObject.get("ABIZENAK").toString(); 
+		String ardura = oharraObject.get("ARDURA").toString(); 
+		String arduraduna = oharraObject.get("ARDURADUNA").toString();
+		String depart_kod = oharraObject.get("DEPARTAMENTUAK_DEPART_KOD").toString();
+
+		Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna,
+				depart_kod);
+		kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.add(langilea);
+	}
+
 
 	// .xml aren amaieran idazten du.
 	public static int idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
