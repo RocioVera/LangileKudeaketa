@@ -96,7 +96,7 @@ public class Leiho5LangileFitxKargatu extends JFrame {
 					kontrolatzailea.MetodoakBBDD.multiLangileTaulaIdatzi();
 					
 				} else {
-					System.out.println("Erroa Aukerarekin");
+					System.out.println("Errorea Aukerarekin");
 				}
 			}
 		});

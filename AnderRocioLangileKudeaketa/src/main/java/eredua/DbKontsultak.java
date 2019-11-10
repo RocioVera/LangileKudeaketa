@@ -266,7 +266,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"INSERT INTO `LANGILEAK` (`DEPART_KOD`, `IZENA`, `KOKAPENA`, `ERAIKUNTZA_ZBK`, `IRAKASLE_KOP`)"
+					"INSERT INTO `DEPARTAMENTUAK` (`DEPART_KOD`, `IZENA`, `KOKAPENA`, `ERAIKUNTZA_ZBK`, `IRAKASLE_KOP`)"
 							+ " VALUES(?, ?, ?, ?, ?)");
 			for (Departamentua dept : lista_dept) {
 				s.setString(1, dept.getDepart_kod());
