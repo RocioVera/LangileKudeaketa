@@ -57,7 +57,7 @@ public class Departamentua {
 	//@Override
 	public String toString() {
 		return "     Dept kod: " + depart_kod + "\n           Izena: " + izena + "\n           Kokapena: " + kokapena
-				+ "\n           eraikuntza zbk: " + eraikuntza_zbk + "\n           irakasle kopurua: " + irakasle_kop + "\n***********************************\n";
+				+ "\n           eraikuntza zbk: " + eraikuntza_zbk + "\n           irakasle kopurua: " + irakasle_kop + "\n*********************************************************\n";
 	}
 
 }

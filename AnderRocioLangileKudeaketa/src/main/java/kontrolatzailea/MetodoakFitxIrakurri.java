@@ -23,6 +23,9 @@ public class MetodoakFitxIrakurri {
 	public static void idatziXMLMet(ArrayList<Langilea> lista_langileak) {
 		eredua.FitxKudeaketaLangilea.idatziLangileakXML(lista_langileak);
 	}
+	public static void idatziLangileakCSVMet(ArrayList<Langilea> lista_langileak) {
+		eredua.FitxKudeaketaLangilea.idatziLangileakCSV(lista_langileak);
+	}
 
 	//DEPARTAMENTUAK
 	public static ArrayList<Departamentua> irakurriDeptXMLMet(String helbidea) {

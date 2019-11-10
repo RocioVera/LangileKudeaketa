@@ -88,9 +88,8 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .csv aren amaieran idazten du.
-	public static int idatziLangileakCSV(ArrayList<Langilea> lista_langileak, String helbidea) {
-		int idatzita = 0;
-		File d = new File(helbidea);
+	public static void idatziLangileakCSV(ArrayList<Langilea> lista_langileak) {
+		File d = new File("src/main/java/fitxategiakSortuta/LangileakFitx.csv");
 		FileWriter fw;
 		BufferedWriter bw;
 		try {
@@ -104,11 +103,13 @@ public class FitxKudeaketaLangilea {
 						+ lista_langileak.get(i).getDepartamentu_kod() + "\"");
 				bw.flush(); // csv-an idatzitakoa gortzeko
 			}
-			idatzita = 1;
+			JOptionPane.showMessageDialog(null, "CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+
 		} catch (IOException e) {
 			// e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+
 		}
-		return idatzita;
 	}
 
 	// .xml an dauden lerroak arraylist batean sartu
@@ -163,9 +164,7 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .xml aren amaieran idazten du.
-	public static int idatziLangileakXML(ArrayList<Langilea> lista_langileak) {
-		int idatzita = 0;
-
+	public static void idatziLangileakXML(ArrayList<Langilea> lista_langileak) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		try {
@@ -212,30 +211,28 @@ public class FitxKudeaketaLangilea {
 
 				raiz.appendChild(row);
 			}
-			JOptionPane.showMessageDialog(null, "Fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
-
 		}
 
 		ficheroXML.normalizeDocument();
 
 		Source source = new DOMSource(ficheroXML);
-		Result result = new StreamResult(new File("src/main/java/fitxategiak/LangileakFitx.xml"));
+		Result result = new StreamResult(new File("src/main/java/fitxategiakSortuta/LangileakFitx.xml"));
 		Transformer transformer = null;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			idatzita = 1;
+			JOptionPane.showMessageDialog(null, "XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerFactoryConfigurationError e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		}
 
-		return idatzita;
 	}
 
 	// .json an dauden lerroak arraylist batean sartu
@@ -297,6 +294,7 @@ public class FitxKudeaketaLangilea {
 	 */
 
 	// .xml aren amaieran idazten du.
+	
 	public static int idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
 		int idatzita = 0;
 
@@ -381,7 +379,9 @@ public class FitxKudeaketaLangilea {
 
 	// DEPARTAMENTUAK
 	// .csv an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
+	
+	//DEPARTAMENTUAK
+public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
 		// bariableak
 		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
 		FileReader fitxeroa = null;
@@ -419,6 +419,7 @@ public class FitxKudeaketaLangilea {
 		return lista_dept;
 	}
 
+	
 	// .xml an dauden lerroak arraylist batean sartu
 	public static ArrayList<Departamentua> irakurriDeptXML(String helbidea) {
 		// bariableak

@@ -67,7 +67,7 @@ public class Langilea {
 	//@Override
 	public String toString() {
 		return "     Langile nan: " + nan + "\n           Izena: " + izena + "\n           Abizenak: " + abizenak + "\n           " + ardura
-				+ "\n           Arduraduna: " + arduraduna + "\n           Dept kod: " + departamentu_kod + "\n***********************************\n";
+				+ "\n           Arduraduna: " + arduraduna + "\n           Dept kod: " + departamentu_kod + "\n*********************************************************\n";
 	}
 	
 }
