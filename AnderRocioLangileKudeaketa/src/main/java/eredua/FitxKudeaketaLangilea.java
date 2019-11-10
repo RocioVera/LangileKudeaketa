@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,8 +21,14 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
+import org.apache.fop.apps.FOUserAgent;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.MimeConstants;
+import org.apache.fop.tools.anttasks.Fop;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,13 +37,13 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
-/*import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-*/
-
-import jdk.nashorn.internal.parser.JSONParser;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.codec.Base64.OutputStream;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.DocumentException;
 
 public class FitxKudeaketaLangilea {
 
@@ -187,6 +194,11 @@ public class FitxKudeaketaLangilea {
 				Text nantext = ficheroXML.createTextNode(lista_langileak.get(i).getNan() + "\n");
 				nan.appendChild(nantext);
 				row.appendChild(nan);
+				
+				Element izena = ficheroXML.createElement("IZENA");
+				Text izenatext = ficheroXML.createTextNode(lista_langileak.get(i).getAbizenak() + "\n");
+				izena.appendChild(izenatext);
+				row.appendChild(izena);
 
 				Element abizenak = ficheroXML.createElement("ABIZENAK");
 				Text abizenaktext = ficheroXML.createTextNode(lista_langileak.get(i).getAbizenak() + "\n");
@@ -294,7 +306,7 @@ public class FitxKudeaketaLangilea {
 	 */
 
 	// .xml aren amaieran idazten du.
-	
+
 	public static int idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
 		int idatzita = 0;
 
@@ -379,9 +391,9 @@ public class FitxKudeaketaLangilea {
 
 	// DEPARTAMENTUAK
 	// .csv an dauden lerroak arraylist batean sartu
-	
-	//DEPARTAMENTUAK
-public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
+
+	// DEPARTAMENTUAK
+	public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
 		// bariableak
 		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
 		FileReader fitxeroa = null;
@@ -419,7 +431,6 @@ public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
 		return lista_dept;
 	}
 
-	
 	// .xml an dauden lerroak arraylist batean sartu
 	public static ArrayList<Departamentua> irakurriDeptXML(String helbidea) {
 		// bariableak
@@ -464,6 +475,31 @@ public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
 			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
 		}
 		return lista_dept;
+	}
+
+	public static void idatziLangileakPDF(ArrayList<Langilea> lista_langileak) {
+		 try {
+	            // Nombre del archivo FO
+	            File xsltFile = new File("src/main/java/fitxategiakSortuta/reporte.xsl");
+	            //Archivo XML que proveerá de datos
+	            StreamSource xmlSource = new StreamSource(new File("src/main/java/fitxategiakSortuta/LangileakFitx.xml"));
+	            FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+	            FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+	            FileOutputStream out;
+	            //Archivo PDF
+	            out = new FileOutputStream("src/main/java/fitxategiakSortuta/LangileakFitx.pdf");
+	            org.apache.fop.apps.Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, out);
+	            TransformerFactory factory = TransformerFactory.newInstance();
+	            Transformer transformer = factory.newTransformer(new StreamSource(xsltFile));
+	            Result res = new SAXResult(fop.getDefaultHandler());
+	            transformer.transform(xmlSource, res);
+	            out.close();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+
 	}
 
 }

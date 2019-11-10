@@ -72,7 +72,7 @@ public class Leiho4Txostenak extends JFrame {
 				// SORTU
 				MetodoakFitxIrakurri.idatziXMLMet(ateraLangileak);
 				MetodoakFitxIrakurri.idatziLangileakCSVMet(ateraLangileak);
-
+				MetodoakFitxIrakurri.idatziLangileakPDFMet(ateraLangileak);
 			}
 		});
 		btnFitxeroaSortu.setBounds(10, 483, 128, 23);
