@@ -30,13 +30,22 @@ public class MetodoakLeihoAldaketa {
 		Leiho2.setVisible(true);
 	}
 	
-	public static void hirugarrenLeihoaGehitu() {
+	public static void hirugarrenLeihoaGehituLangileak() {
 		Leiho3LangileKudeaketa_Gehitu Leiho3 = new Leiho3LangileKudeaketa_Gehitu();
 		Leiho3.setVisible(true);
 	}
 	
-	public static void hirugarrenLeihoaUpdate(Langilea langile) {
+	public static void hirugarrenLeihoaGehituDepartamentuak() {
+		Leiho3DeptKudeaketa_Gehitu Leiho3 = new Leiho3DeptKudeaketa_Gehitu();
+		Leiho3.setVisible(true);
+	}
+	
+	public static void hirugarrenLeihoaUpdateLangileak(Langilea langile) {
 		Leiho3LangileKudeaketa_Update Leiho3 = new Leiho3LangileKudeaketa_Update(langile);
+		Leiho3.setVisible(true);
+	}
+	public static void hirugarrenLeihoaUpdateDepartamentuak(Departamentua departamentua) {
+		Leiho3DeptKudeaketa_Update Leiho3 = new Leiho3DeptKudeaketa_Update(departamentua);
 		Leiho3.setVisible(true);
 	}
 

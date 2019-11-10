@@ -1,6 +1,7 @@
 package ikuspegia;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import java.awt.Dimension;
 import java.awt.Color;
@@ -10,192 +11,158 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
-import javax.swing.SwingConstants;
-
-import org.apache.log4j.Logger;
-
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 import kontrolatzailea.MetodoakLeihoAldaketa;
+import eredua.Departamentua;
+import eredua.Langilea;
+import jdk.nashorn.internal.runtime.ListAdapter;
 
 public class Leiho2DeptKudeaketa extends JFrame {
-
 	private static final long serialVersionUID = 1L;
-	private JLabel lblDepartKod, lblIzena, lblKokapena , lblEraikuntzaZbk, lblIrakKop, lblDepartamentuDatuak, lblKokapena_1;
-	private JTextField txtIzena, txtEraikuntzaZbk, txtIrakKop;
-	private JButton btnKargatuFitxategia, btnEzeztatu, btnGorde, btnTxostenakSortu;
-	private JComboBox jcbKokapena, jcbDeptKod;
-	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
-
+	protected static final Vector constante = null;
+	private JButton btnKargatuFitxategia, btnIrten = new JButton("Irten"), btnReload = new JButton("Reload");
+	private JTable table;
+	private JLabel lblDepartamentuKudeaketa = new JLabel("Departamentu Kudeaketa");
+	private JScrollPane scrollPane = new JScrollPane();
+	private DefaultTableModel t1 = new DefaultTableModel();
+	private String[] columnas = new String[6];
+	
+	private final JButton btnInsert = new JButton("Insert"), btnUpdate = new JButton("Update"),
+			btnDelete = new JButton("Delete");
 
 	public Leiho2DeptKudeaketa() {
-		//panelaren propietateak
-		//	setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Argazkiak\\logoa.png")); 
-		getContentPane().setLayout(null);
-		this.setBounds(350,50,600,600);
-		this.setTitle("6.taldearen DEPARTAMENTU kudeaketa");
+		this.setBounds(350, 50, 600, 600);
+		this.setTitle("6.taldearen departamentuen kudeaketa");
 		this.setResizable(false); // neurketak ez aldatzeko
-		this.setSize(new Dimension(600, 600));
+		this.setSize(new Dimension(802, 600));
+		
+		btnIrten.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnIrten.setForeground(Color.BLACK);
+		btnIrten.setBounds(643, 487, 89, 35);
 
-		lblDepartamentuDatuak = new JLabel("Departamentu datuak -----------------------------------------------------------------------------------------");
-		lblDepartamentuDatuak.setForeground(Color.GRAY);
-		lblDepartamentuDatuak.setBounds(10, 23, 590, 14);
-		getContentPane().add(lblDepartamentuDatuak);
-
-		lblDepartKod = new JLabel("Departamentu kodea:");
-		lblDepartKod.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDepartKod.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblDepartKod.setForeground(Color.BLACK);
-		lblDepartKod.setBounds(20, 60, 233, 21);
-		getContentPane().add(lblDepartKod);
-
-		ArrayList<String> froga = new ArrayList<String>();
-		froga.add("aaa");
-		froga.add("bbb");
-		froga.add("ccc");
-		froga.add("ddd");
-		froga.add("eee");
-
-		jcbDeptKod = new JComboBox();
-		jcbDeptKod.setFont(new Font("Dialog", Font.PLAIN, 16));
-		jcbDeptKod.setForeground(Color.BLACK);
-		jcbDeptKod.setBounds(258, 60, 124, 27);
-		// DEPARTAMENTU KODEAK JARRI BEHAR DIRA, EZ froga /
-		for (int i = 0; i < froga.size(); i++)
-			jcbDeptKod.addItem(froga.get(i));
-		jcbDeptKod.setSelectedIndex(0);
-		getContentPane().add(jcbDeptKod);
-
-		lblIzena = new JLabel("Izena:");
-		lblIzena.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIzena.setForeground(Color.BLACK);
-		lblIzena.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblIzena.setBounds(20, 118, 233, 21);
-		getContentPane().add(lblIzena);
-
-		txtIzena = new JTextField();
-		txtIzena.setColumns(10);
-		txtIzena.setBounds(258, 118, 124, 27);
-		txtIzena.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char letraIzena = e.getKeyChar();
-				String cadena = letraIzena + "";
-				if (txtIzena.getText().length() > 45 || !cadena.matches("[a-zA-Z]")) {
-					e.consume(); // ez du godetzen
-					logger.info("Departamentu izena lekuan: " + e +" sartu du.");
-				}
-
-			}
-		});
-		getContentPane().add(txtIzena);
-
-		lblKokapena_1 = new JLabel("Kokapena --------------------------------------------------------------------------------------------------------");
-		lblKokapena_1.setForeground(Color.GRAY);
-		lblKokapena_1.setBounds(10, 176, 578, 15);
-		getContentPane().add(lblKokapena_1);
-
-		lblKokapena = new JLabel("Kokapena:");
-		lblKokapena.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblKokapena.setForeground(Color.BLACK);
-		lblKokapena.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblKokapena.setBounds(20, 218, 233, 21);
-		getContentPane().add(lblKokapena);
-
-		jcbKokapena = new JComboBox();
-		jcbKokapena.setFont(new Font("Dialog", Font.PLAIN, 14));
-		jcbKokapena.setForeground(Color.BLACK);
-		jcbKokapena.setBounds(258, 212, 205, 33);
-		jcbKokapena.addItem("ELORRIETA");
-		jcbKokapena.addItem("ERREKA-MARI");
-		jcbKokapena.setSelectedIndex(0);
-
-		getContentPane().add(jcbKokapena);
-
-		lblEraikuntzaZbk = new JLabel("Eraikuntza zenbakia:");
-		lblEraikuntzaZbk.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblEraikuntzaZbk.setForeground(Color.BLACK);
-		lblEraikuntzaZbk.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblEraikuntzaZbk.setBounds(20, 298, 233, 21);
-		getContentPane().add(lblEraikuntzaZbk);
-
-		txtEraikuntzaZbk = new JTextField();
-		txtEraikuntzaZbk.setColumns(10);
-		txtEraikuntzaZbk.setBounds(258, 296, 124, 27);
-		txtEraikuntzaZbk.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char letraEraikuntzaZBK = e.getKeyChar();
-				String cadena = letraEraikuntzaZBK + "";
-				if (txtEraikuntzaZbk.getText().length() > 2 || !cadena.matches("[0-9]")) {
-					e.consume(); // ez du godetzen
-					logger.info("Departamentuaren eraikuntza zenbakia lekuan: " + e +" sartu du.");
-				}
-
-			}
-		});
-		getContentPane().add(txtEraikuntzaZbk);
-
-		lblIrakKop = new JLabel("Irakasle kopurua:");
-		lblIrakKop.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIrakKop.setForeground(Color.BLACK);
-		lblIrakKop.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblIrakKop.setBounds(20, 385, 233, 21);
-		getContentPane().add(lblIrakKop);
-
-		txtIrakKop = new JTextField();
-		txtIrakKop.setColumns(10);
-		txtIrakKop.setBounds(258, 383, 124, 27);
-		txtIrakKop.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char letraIrakKop = e.getKeyChar();
-				String cadena = letraIrakKop + "";
-				if (txtIrakKop.getText().length() > 2 || !cadena.matches("[0-9]")) {
-					e.consume(); // ez du godetzen
-					logger.info("Departamentuaren irakasle kopuruan: " + e +" sartu du.");
-				}
-
-			}
-		});
-		getContentPane().add(txtIrakKop);
-
-		// botoiak
-		btnEzeztatu = new JButton("Ezeztatu");
-		btnEzeztatu.setFont(new Font("Dialog", Font.BOLD, 16));
-		btnEzeztatu.setForeground(Color.BLACK);
-		btnEzeztatu.addActionListener(new ActionListener() {
+		btnIrten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MetodoakLeihoAldaketa.lehenengoLeihoa();
 			}
 		});
-		btnEzeztatu.setBounds(440, 490, 124, 32);
-		getContentPane().add(btnEzeztatu);
+		getContentPane().setLayout(null);
+		getContentPane().add(btnIrten);
+		
+		scrollPane.setBorder(null);
+		scrollPane.setBounds(12, 97, 720, 299);
+		getContentPane().add(scrollPane);
+		table = new JTable();
+		table.setBorder(null);
+		taulaFormatua();
+		table.getTableHeader().setReorderingAllowed(false);
+		scrollPane.setViewportView(table);
+		
+		lblDepartamentuKudeaketa.setForeground(Color.BLACK);
+		lblDepartamentuKudeaketa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDepartamentuKudeaketa.setBounds(0, 31, 796, 43);
+		lblDepartamentuKudeaketa.setFont(new Font("Tahoma", Font.BOLD, 22));
+		getContentPane().add(lblDepartamentuKudeaketa);
 
 		btnKargatuFitxategia = new JButton("Kargatu fitxategia");
-		btnKargatuFitxategia.setFont(new Font("Dialog", Font.BOLD, 16));
+		btnKargatuFitxategia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnKargatuFitxategia.setForeground(Color.BLACK);
+		btnKargatuFitxategia.setBounds(62, 487, 188, 35);
 		btnKargatuFitxategia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MetodoakLeihoAldaketa.bostgarrenLeihoa();
-				dispose();
 			}
 		});
-		btnKargatuFitxategia.setBounds(34, 490, 221, 32);
 		getContentPane().add(btnKargatuFitxategia);
-
-		btnGorde = new JButton("Gorde");
-		btnGorde.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (!txtIzena.getText().matches("[a-zA-Z]") && txtIrakKop.getText().matches("[0-9]{1,3}") && txtEraikuntzaZbk.getText().matches("[0-9]{1,3}"))
-					System.out.println("baaaaiiii"); // llamar metodo subir datos
+		
+		btnInsert.setForeground(Color.BLACK);
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaGehituDepartamentuak();
 			}
 		});
-		btnGorde.setForeground(Color.BLACK);
-		btnGorde.setFont(new Font("Dialog", Font.BOLD, 16));
-		btnGorde.setBounds(295, 490, 99, 33);
-		getContentPane().add(btnGorde);
+		btnInsert.setBounds(113, 409, 89, 23);
+		getContentPane().add(btnInsert);
+		
+		btnUpdate.setForeground(Color.BLACK);
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Departamentua departamentua = new Departamentua(null,null,null,null,null);
+						/*t1.getValueAt(table.getSelectedRow(), 0).toString(),
+						t1.getValueAt(table.getSelectedRow(), 1).toString(),
+						t1.getValueAt(table.getSelectedRow(), 2).toString(),
+						t1.getValueAt(table.getSelectedRow(), 3).toString(),
+						t1.getValueAt(table.getSelectedRow(), 4).toString(),
+						t1.getValueAt(table.getSelectedRow(), 5).toString());*/
+				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaUpdateDepartamentuak(departamentua);
+			}
+		});
+		btnUpdate.setBounds(352, 409, 89, 23);
+		getContentPane().add(btnUpdate);
+		
+		btnDelete.setForeground(Color.BLACK);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Langilea langile = new Langilea(
+						t1.getValueAt(table.getSelectedRow(), 0).toString(),
+						t1.getValueAt(table.getSelectedRow(), 1).toString(),
+						t1.getValueAt(table.getSelectedRow(), 2).toString(),
+						t1.getValueAt(table.getSelectedRow(), 3).toString(),
+						t1.getValueAt(table.getSelectedRow(), 4).toString(),
+						t1.getValueAt(table.getSelectedRow(), 5).toString());
+				kontrolatzailea.MetodoakBBDD.langileTaulaEzabatu(langile);
+			}
+		});
+		btnDelete.setBounds(574, 409, 89, 23);
+		getContentPane().add(btnDelete);
+	
+		btnReload.setForeground(Color.BLACK);
+		btnReload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				taulaEzabatu();
+				MetodoakLeihoAldaketa.lista_langileak = kontrolatzailea.MetodoakBBDD.langileTaulaIrakurri();
+				columnas = new String [6];
+				taulaBete(columnas);
+			}
+		});
+		btnReload.setBounds(634, 62, 129, 23);
+		getContentPane().add(btnReload);
+		
+	}
 
-	}	
+	public void taulaFormatua() {
+		table.setModel(t1);
+		t1.addColumn("NAN");
+		t1.addColumn("IZENA");
+		t1.addColumn("ABIZENAK");
+		t1.addColumn("ARDURA");
+		t1.addColumn("ARDURADUNA");
+		t1.addColumn("DEPARTAMENTUA");
+
+		taulaBete(columnas);
+	}
+
+	private void taulaBete(String[] columnas) {
+		for (int i = 0; i < MetodoakLeihoAldaketa.lista_langileak.size(); i++) {
+			columnas[0] = MetodoakLeihoAldaketa.lista_langileak.get(i).getNan();
+			columnas[1] = MetodoakLeihoAldaketa.lista_langileak.get(i).getIzena();
+			columnas[2] = MetodoakLeihoAldaketa.lista_langileak.get(i).getAbizenak();
+			columnas[3] = MetodoakLeihoAldaketa.lista_langileak.get(i).getArdura();
+			columnas[4] = MetodoakLeihoAldaketa.lista_langileak.get(i).getArduraduna();
+			columnas[5] = MetodoakLeihoAldaketa.lista_langileak.get(i).getDepartamentu_kod();
+			t1.addRow(columnas);
+		}
+	}
+	private void taulaEzabatu() {
+		while (t1.getRowCount() > 0) {
+			t1.removeRow(0);
+		}
+		
+	}
 }

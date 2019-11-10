@@ -110,7 +110,7 @@ public class Leiho2LangileKudeaketa extends JFrame {
 						t1.getValueAt(table.getSelectedRow(), 5).toString());
 				*/
 				//kontrolatzailea.MetodoakBBDD.langileTaulaAldatu(langile);
-				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaGehitu();
+				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaGehituLangileak();
 			}
 		});
 		btnInsert.setBounds(113, 409, 89, 23);
@@ -127,7 +127,7 @@ public class Leiho2LangileKudeaketa extends JFrame {
 						t1.getValueAt(table.getSelectedRow(), 4).toString(),
 						t1.getValueAt(table.getSelectedRow(), 5).toString());
 			//	kontrolatzailea.MetodoakBBDD.langileTaulaAldatu(langile);
-				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaUpdate(langile);
+				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaUpdateLangileak(langile);
 			}
 		});
 		btnUpdate.setBounds(352, 409, 89, 23);
