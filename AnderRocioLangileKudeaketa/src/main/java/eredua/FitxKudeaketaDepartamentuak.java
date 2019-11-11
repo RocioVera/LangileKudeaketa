@@ -30,28 +30,28 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
-import jdk.nashorn.internal.parser.JSONParser;
+import kontrolatzailea.MetodoakBBDD;
+import kontrolatzailea.MetodoakLeihoAldaketa;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class FitxKudeaketaDepartamentuak {
 
-	// .csv an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriLangileakCSV() {
+	// .xml aren amaieran idazten du.
+	public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
 		// bariableak
-		ArrayList<Departamentua> lista_departamentuak = new ArrayList<Departamentua>();
+		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
 		FileReader fitxeroa = null;
 		BufferedReader br = null;
 		try { // aurkitzen duen ala ez
-			fitxeroa = new FileReader("src/fitxategiak/langileak.csv");
+			fitxeroa = new FileReader(helbidea);
 			br = new BufferedReader(fitxeroa);
 			// Langilearen bariableak
-			
 			String katea[];
-			String depart_kod = "";
-			String izena = "";
-			String kokapena = "";
-			String eraikuntza_zbk = "";
-			String irakasle_kop = "";
-		
+			String depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop;
 			try {
 
 				String linea = br.readLine();
@@ -64,227 +64,103 @@ public class FitxKudeaketaDepartamentuak {
 					eraikuntza_zbk = katea[3].replace("\"", "");
 					irakasle_kop = katea[4].replace("\"", "");
 
-					Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-					lista_departamentuak.add(departamentua);
-					
+					Departamentua dept = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
+					lista_dept.add(dept);
 				}
 				br.close();
 				fitxeroa.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Errorea", "Errorea", 0);
 			}
 		} catch (FileNotFoundException e1) {
-			JOptionPane.showConfirmDialog(null, "Ez da fitxeroa aurkitzen", "Bai-ra eman", 0);
+			JOptionPane.showMessageDialog(null, "Ez da fitxeroa aurkitzen", "ERROREA", 0);
 		}
 
-		return lista_departamentuak;
+		return lista_dept;
 	}
 
-	// .csv aren amaieran idazten du.
-	public static int idatziLangileakCSV(ArrayList<Departamentua> lista_langileak) {
-		int idatzita = 0;
-		File d = new File("src/fitxategiak/langileak.csv");
-		FileWriter fw;
-		BufferedWriter bw;
-		
-		try {
-			fw = new FileWriter(d, true);
-			bw = new BufferedWriter(fw);
-			bw.newLine();
-			for (int i = 0; i < lista_langileak.size(); i++) {
-				bw.write(lista_langileak.get(i).getDepart_kod() + ",\"" + lista_langileak.get(i).getIzena() + "\",\""
-						+ lista_langileak.get(i).getKokapena() + "\",\"" + lista_langileak.get(i).getEraikuntza_zbk() + "\",\""
-						+ lista_langileak.get(i).getIrakasle_kop() + "\",\"");
-				bw.flush(); // csv-an idatzitakoa gortzeko
-			}
-			idatzita = 1;
-		} catch (IOException e) {
-			// e.printStackTrace();
-		}
-		return idatzita;
-	}
 
 	// .xml an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriOharrakXML() {
+	public static ArrayList<Departamentua> irakurriDeptXML(String helbidea) {
 		// bariableak
-		ArrayList<Departamentua> lista_departamentuak = new ArrayList<Departamentua>();
-		File fitxeroa = new File("src/Oharrak.xml");
+		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		Document doc = null;
 
-		String depart_kod = "";
-		String izena = "";
-		String kokapena = "";
-		String eraikuntza_zbk = "";
-		String irakasle_kop = "";
-		
+		String depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop;
+
 		try {
 			dBuilder = dbFactory.newDocumentBuilder();
 			try {
-				doc = dBuilder.parse(fitxeroa);
+				doc = dBuilder.parse(helbidea);
 				doc.getDocumentElement().normalize();
-				NodeList lista = doc.getElementsByTagName("langilea");
-
+				NodeList lista = doc.getElementsByTagName("DEPARTAMENTUAK");
 				for (int temp = 0; temp < lista.getLength(); temp++) {
 					Node nNode = lista.item(temp);
 					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 						Element eElement = (Element) nNode;
-						depart_kod = eElement.getElementsByTagName("nan").item(0).getTextContent();
-						izena = eElement.getElementsByTagName("izena").item(0).getTextContent();
-						kokapena = eElement.getElementsByTagName("abizenak").item(0).getTextContent();
-						eraikuntza_zbk = eElement.getElementsByTagName("ardura").item(0).getTextContent();
-						irakasle_kop = eElement.getElementsByTagName("arduraduna").item(0).getTextContent();
-			
-						Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-						lista_departamentuak.add(departamentua);
+						depart_kod = eElement.getElementsByTagName("DEPART_KOD").item(0).getTextContent();
+						izena = eElement.getElementsByTagName("IZENA").item(0).getTextContent();
+						kokapena = eElement.getElementsByTagName("KOKAPENA").item(0).getTextContent();
+						eraikuntza_zbk = eElement.getElementsByTagName("ERAIKUNTZA_ZBK").item(0).getTextContent();
+						irakasle_kop = eElement.getElementsByTagName("IRAKASLE_KOP").item(0).getTextContent();
+
+						Departamentua dept = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk,
+								irakasle_kop);
+						lista_dept.add(dept);
 					}
 				}
 			} catch (SAXException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Ez duzu fitxero zuzena sartu", "ERROREA", 0);
 			} catch (IOException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
 			}
 		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-		System.out.println();
-		return lista_departamentuak;
-	}
-
-	// .xml aren amaieran idazten du.
-	public static int idatziOharrakXML(Departamentua departamentua) {
-		int idatzita = 0;
-
-		ArrayList<Departamentua> lista_departamentuak = new ArrayList<Departamentua>();
-
-		lista_departamentuak = irakurriOharrakXML();
-		lista_departamentuak.add(departamentua);
-
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = null;
-		try {
-			builder = factory.newDocumentBuilder();
-		} catch (ParserConfigurationException e1) {
-			e1.printStackTrace();
-		}
-		DOMImplementation implementation = builder.getDOMImplementation();
-
-		Document ficheroXML = implementation.createDocument(null, "root", null);
-		ficheroXML.setXmlVersion("1.0");
-
-		Element raiz = ficheroXML.getDocumentElement();
-
-		try {
-			for (int i = 0; i < lista_departamentuak.size(); i++) {
-				Element row = ficheroXML.createElement("departamentua");
-
-				Element depart_kod = ficheroXML.createElement("depart_kod");
-				Text depart_kodText = ficheroXML.createTextNode(lista_departamentuak.get(i).getDepart_kod() + "\n");
-				depart_kod.appendChild(depart_kodText);
-				row.appendChild(depart_kod);
-
-				Element izena = ficheroXML.createElement("izena");
-				Text izenaText = ficheroXML.createTextNode(lista_departamentuak.get(i).getIzena() + "\n");
-				izena.appendChild(izenaText);
-				row.appendChild(izena);
-
-				Element kokapena = ficheroXML.createElement("kokapena");
-				Text kokapenaText = ficheroXML.createTextNode(lista_departamentuak.get(i).getKokapena() + "\n");
-				kokapena.appendChild(kokapenaText);
-				row.appendChild(kokapena);
-
-				Element eraikuntza_zbk = ficheroXML.createElement("eraikuntza_zbk");
-				Text eraikuntza_zbkText = ficheroXML.createTextNode(lista_departamentuak.get(i).getEraikuntza_zbk() + "\n");
-				eraikuntza_zbk.appendChild(eraikuntza_zbkText);
-				row.appendChild(eraikuntza_zbk);
-
-				Element irakasle_kop = ficheroXML.createElement("irakasle_kop");
-				Text irakasle_kopText = ficheroXML.createTextNode(lista_departamentuak.get(i).getIrakasle_kop() + "\n");
-				irakasle_kop.appendChild(irakasle_kopText);
-				row.appendChild(irakasle_kop);
-
-				raiz.appendChild(row);
-			}
-
+			JOptionPane.showMessageDialog(null, "Errorea", "ERROREA", 0);
 		} catch (Exception e) {
-
+			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
 		}
-
-		ficheroXML.normalizeDocument();
-
-		Source source = new DOMSource(ficheroXML);
-		Result result = new StreamResult(new File("src/Oharrak.xml"));
-		Transformer transformer = null;
-		try {
-			transformer = TransformerFactory.newInstance().newTransformer();
-			transformer.transform(source, result);
-			idatzita = 1;
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e) {
-			e.printStackTrace();
-		}
-
-		return idatzita;
+		return lista_dept;
 	}
 
 	// .json an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriOharrakJSON(String helbidea) {
-		ArrayList<Departamentua> lista_departamentuak = new ArrayList<Departamentua>();
-
-		File fitxeroa = new File(helbidea);
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
-		Document doc = null;
-
-		String depart_kod = "";
-		String izena = "";
-		String kokapena = "";
-		String eraikuntza_zbk = "";
-		String irakasle_kop = "";
+	public static ArrayList<Departamentua> irakurriDeptJSON(String helbidea) {
 		
-		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-			try {
-				doc = dBuilder.parse(fitxeroa);
-				doc.getDocumentElement().normalize();
-				NodeList lista = doc.getElementsByTagName("row");
+		JSONParser jsonParser = new JSONParser();
 
-				for (int temp = 0; temp < lista.getLength(); temp++) {
-					Node nNode = lista.item(temp);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {		
-						Element eElement = (Element) nNode;
-						depart_kod = eElement.getElementsByTagName("depart_kod").item(0).getTextContent();
-						izena = eElement.getElementsByTagName("izena").item(0).getTextContent();
-						kokapena = eElement.getElementsByTagName("kokapena").item(0).getTextContent();
-						eraikuntza_zbk = eElement.getElementsByTagName("eraikuntza_zbk").item(0).getTextContent();
-						irakasle_kop = eElement.getElementsByTagName("irakasle_kop").item(0).getTextContent();
-						Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-						lista_departamentuak.add(departamentua);
-					}
-				}
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} catch (ParserConfigurationException e) {
+		try (FileReader reader = new FileReader(helbidea)) {
+			Object obj = jsonParser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp -> parseDeptObject((JSONObject) emp));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println();
-		return lista_departamentuak;
+		return MetodoakLeihoAldaketa.lista_departamentuak;
 	}
+	
+	private static void parseDeptObject(JSONObject employee) {
+		JSONObject oharraObject = (JSONObject) employee.get("DEPARTAMENTUAK");
 
-	// .xml aren amaieran idazten du.
-	public static int idatziOharrak(Departamentua departamentua, String helbidea) {
-		int idatzita = 0;
+		String depart_kod = (String) oharraObject.get("DEPART_KOD");
+		String izena = (String) oharraObject.get("IZENA");
+		String kokapena = (String) oharraObject.get("KOKAPENA");
+		String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
+		String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
 
-		ArrayList<Departamentua> lista_departamentuak = new ArrayList<Departamentua>();
-		
-		lista_departamentuak = irakurriOharrakJSON(helbidea);
-		lista_departamentuak.add(departamentua);
-
+		Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
+		MetodoakLeihoAldaketa.lista_departamentuak.add(departamentua);
+	}
+	
+	
+	
+	public static void idatziDeptXML(ArrayList<Departamentua> lista_dept) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		try {
@@ -300,59 +176,84 @@ public class FitxKudeaketaDepartamentuak {
 		Element raiz = ficheroXML.getDocumentElement();
 
 		try {
-			for (int i = 0; i < lista_departamentuak.size(); i++) {
-				Element row = ficheroXML.createElement("departamentua");				
-				
-				Element depart_kod = ficheroXML.createElement("depart_kod");
-				Text depart_kodText = ficheroXML.createTextNode(lista_departamentuak.get(i).getDepart_kod() + "\n");
-				depart_kod.appendChild(depart_kodText);
-				row.appendChild(depart_kod);
+			for (int i = 0; i < lista_dept.size(); i++) {
+				Element row = ficheroXML.createElement("LANGILEAK");
 
-				Element izena = ficheroXML.createElement("izena");
-				Text izenaText = ficheroXML.createTextNode(lista_departamentuak.get(i).getIzena() + "\n");
-				izena.appendChild(izenaText);
+				Element departKod = ficheroXML.createElement("DEPART_KOD");
+				Text departKodtext = ficheroXML.createTextNode(lista_dept.get(i).getDepart_kod() + "\n");
+				departKod.appendChild(departKodtext);
+				row.appendChild(departKod);
+
+				Element izena = ficheroXML.createElement("IZENA");
+				Text izenatext = ficheroXML.createTextNode(lista_dept.get(i).getIzena() + "\n");
+				izena.appendChild(izenatext);
 				row.appendChild(izena);
 
-				Element kokapena = ficheroXML.createElement("kokapena");
-				Text kokapenaText = ficheroXML.createTextNode(lista_departamentuak.get(i).getKokapena() + "\n");
-				kokapena.appendChild(kokapenaText);
+				Element kokapena = ficheroXML.createElement("KOKAPENA");
+				Text kokapenatext = ficheroXML.createTextNode(lista_dept.get(i).getKokapena() + "\n");
+				kokapena.appendChild(kokapenatext);
 				row.appendChild(kokapena);
 
-				Element eraikuntza_zbk = ficheroXML.createElement("eraikuntza_zbk");
-				Text eraikuntza_zbkText = ficheroXML.createTextNode(lista_departamentuak.get(i).getEraikuntza_zbk() + "\n");
-				eraikuntza_zbk.appendChild(eraikuntza_zbkText);
-				row.appendChild(eraikuntza_zbk);
+				Element eraikuntzaZbk = ficheroXML.createElement("ERAIKUNTZA_ZBK");
+				Text eraikuntzaZbktext = ficheroXML.createTextNode(lista_dept.get(i).getIrakasle_kop() + "\n");
+				eraikuntzaZbk.appendChild(eraikuntzaZbktext);
+				row.appendChild(eraikuntzaZbk);
 
-				Element irakasle_kop = ficheroXML.createElement("irakasle_kop");
-				Text irakasle_kopText = ficheroXML.createTextNode(lista_departamentuak.get(i).getIrakasle_kop() + "\n");
-				irakasle_kop.appendChild(irakasle_kopText);
-				row.appendChild(irakasle_kop);
+				Element irakasleKop = ficheroXML.createElement("IRAKASLE_KOP");
+				Text irakasleKoptext = ficheroXML.createTextNode(lista_dept.get(i).getIrakasle_kop() + "\n");
+				irakasleKop.appendChild(irakasleKoptext);
+				row.appendChild(irakasleKop);
 
 				raiz.appendChild(row);
 			}
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 
 		ficheroXML.normalizeDocument();
 
 		Source source = new DOMSource(ficheroXML);
-		Result result = new StreamResult(new File(helbidea));
+		Result result = new StreamResult(new File("src/main/java/fitxategiakSortuta/DepartamentuaFitx.xml"));
 		Transformer transformer = null;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			idatzita = 1;
+			JOptionPane.showMessageDialog(null, "Departamentu XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Departamentu XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerFactoryConfigurationError e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Departamentu XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		}
 
-
-		return idatzita;
 	}
+
+	// .csv aren amaieran idazten du.
+	public static void idatziDeptCSV(ArrayList<Departamentua> lista_dept) {
+		File d = new File("src/main/java/fitxategiakSortuta/DepartamentuaFitx.csv");
+		FileWriter fw;
+		BufferedWriter bw;
+		try {
+			fw = new FileWriter(d, true);
+			bw = new BufferedWriter(fw);
+			bw.newLine();
+			for (int i = 0; i < lista_dept.size(); i++) {
+				bw.write(lista_dept.get(i).getDepart_kod() + ",\"" + lista_dept.get(i).getIzena() + "\",\""
+						+ lista_dept.get(i).getKokapena() + "\",\"" + lista_dept.get(i).getEraikuntza_zbk() + "\",\""
+						+ lista_dept.get(i).getIzena() + "\"");
+				bw.flush(); // csv-an idatzitakoa gortzeko
+			}
+			JOptionPane.showMessageDialog(null, "Departamentu CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+
+		} catch (IOException e) {
+			// e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Departamentu CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+
+		}
+	}
+
 
 	
 }

@@ -23,15 +23,10 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.json.simple.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.junit.internal.matchers.Each;
-//import org.json.simple.parser.ParseException;
-//
-//import org.apache.fop.apps.FOUserAgent;
-//import org.apache.fop.apps.FopFactory;
-//import org.apache.fop.apps.MimeConstants;
-//import org.apache.fop.tools.anttasks.Fop;
+
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -47,6 +42,8 @@ import org.xml.sax.SAXException;
 //import com.itextpdf.text.pdf.codec.Base64.OutputStream;
 //import com.itextpdf.text.pdf.PdfDocument;
 //import com.itextpdf.text.DocumentException;
+
+import kontrolatzailea.MetodoakLeihoAldaketa;
 
 public class FitxKudeaketaLangilea {
 
@@ -113,11 +110,11 @@ public class FitxKudeaketaLangilea {
 						+ lista_langileak.get(i).getDepartamentu_kod() + "\"");
 				bw.flush(); // csv-an idatzitakoa gortzeko
 			}
-			JOptionPane.showMessageDialog(null, "CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 
 		} catch (IOException e) {
 			// e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 
 		}
 	}
@@ -239,85 +236,57 @@ public class FitxKudeaketaLangilea {
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			JOptionPane.showMessageDialog(null, "XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerFactoryConfigurationError e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		}
 
 	}
 
 	// .json an dauden lerroak arraylist batean sartu
-
-	public static ArrayList<Langilea> irakurriLangileakJSON(String helbidea) {
-		ArrayList<Langilea> lista_langilea = new ArrayList<Langilea>();
-
-
-		JSONParser parser = new JSONParser();
+	public static ArrayList<Langilea> irakurriLangileaJSON(String helbidea) {
 		
-		try { 
-			FileReader reader = new FileReader(helbidea);
+		JSONParser jsonParser = new JSONParser();
+
+		try (FileReader reader = new FileReader(helbidea)) {
 			Object obj = null;
 			try {
-				obj = parser.parse(reader);
+				obj = jsonParser.parse(reader);
 			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			JSONArray langilelista = (JSONArray) obj;
-			for (Object objet : langilelista) {
-//				JSONObject langile = (JSONObject) objet;
-//
-//				String nan= langile.get("NAN").toString();
-//				String izena = langile.getString("IZENA"); 
-//				String abizenak =  langile.getString("ABIZENAK"); 
-//				String ardura =  langile.getString("ARDURA"); 
-//				String arduraduna =  langile.getString("ARDURADUNA");
-//				String depart_kod =  langile.getString("DEPARTAMENTUAK_DEPART_KOD");
-//
-//				
-//				Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna,
-//						depart_kod);
-//				kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.add(langilea);
-
-	        }
-			
-			langilelista.forEach(langile -> parseOharrakObject(langile));
-
-		
-		}catch
-		(FileNotFoundException e) { e.printStackTrace();
-
-		}catch (IOException e) {
-			e.printStackTrace(); }
-
-		return lista_langilea;
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp -> parseLangileObject((JSONObject) emp));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return MetodoakLeihoAldaketa.lista_langileak;
 	}
+	
+	private static void parseLangileObject(JSONObject employee) {
+		JSONObject oharraObject = (JSONObject) employee.get("DEPARTAMENTUAK");
 
-	private static void parseOharrakObject(Object objet) { 
-		
-		JSONObject langile = (JSONObject) objet;
-		
-		String nan= langile.getString("NAN");
-		String izena = langile.getString("IZENA"); 
-		String abizenak =  langile.getString("ABIZENAK"); 
-		String ardura =  langile.getString("ARDURA"); 
-		String arduraduna =  langile.getString("ARDURADUNA");
-		String depart_kod =  langile.getString("DEPARTAMENTUAK_DEPART_KOD");
+		String depart_kod = (String) oharraObject.get("DEPART_KOD");
+		String izena = (String) oharraObject.get("IZENA");
+		String kokapena = (String) oharraObject.get("KOKAPENA");
+		String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
+		String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
 
-		Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna,
-				depart_kod);
-		kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.add(langilea);
+		Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
+		MetodoakLeihoAldaketa.lista_departamentuak.add(departamentua);
 	}
-
-
+	
+	
 	// .xml aren amaieran idazten du.
 
-	public static int idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
-		int idatzita = 0;
-
+	public static void idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		try {
@@ -384,7 +353,6 @@ public class FitxKudeaketaLangilea {
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			idatzita = 1;
 		} catch (TransformerException e) {
 			JOptionPane.showMessageDialog(null, "Errorea fitxeroa transformatzerakoan", "konbertsio errorea", 0);
 
@@ -394,97 +362,10 @@ public class FitxKudeaketaLangilea {
 			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
 		}
 
-		return idatzita;
 	}
 
 	// DEPARTAMENTUAK
-	// .csv an dauden lerroak arraylist batean sartu
-
-	// DEPARTAMENTUAK
-	public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
-		// bariableak
-		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
-		FileReader fitxeroa = null;
-		BufferedReader br = null;
-		try { // aurkitzen duen ala ez
-			fitxeroa = new FileReader(helbidea);
-			br = new BufferedReader(fitxeroa);
-			// Langilearen bariableak
-			String katea[];
-			String depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop;
-			try {
-
-				String linea = br.readLine();
-				while ((linea = br.readLine()) != null) {
-					// lerro zuriak ez irakurtzeko
-					katea = linea.split(",");
-					depart_kod = katea[0].replace("\"", "");
-					izena = katea[1].replace("\"", "");
-					kokapena = katea[2].replace("\"", "");
-					eraikuntza_zbk = katea[3].replace("\"", "");
-					irakasle_kop = katea[4].replace("\"", "");
-
-					Departamentua dept = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-					lista_dept.add(dept);
-				}
-				br.close();
-				fitxeroa.close();
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Errorea", "Errorea", 0);
-			}
-		} catch (FileNotFoundException e1) {
-			JOptionPane.showMessageDialog(null, "Ez da fitxeroa aurkitzen", "ERROREA", 0);
-		}
-
-		return lista_dept;
-	}
-
-	// .xml an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriDeptXML(String helbidea) {
-		// bariableak
-		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
-		Document doc = null;
-
-		String depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop;
-
-		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-			try {
-				doc = dBuilder.parse(helbidea);
-				doc.getDocumentElement().normalize();
-				NodeList lista = doc.getElementsByTagName("DEPARTAMENTUAK");
-				for (int temp = 0; temp < lista.getLength(); temp++) {
-					Node nNode = lista.item(temp);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						depart_kod = eElement.getElementsByTagName("DEPART_KOD").item(0).getTextContent();
-						izena = eElement.getElementsByTagName("IZENA").item(0).getTextContent();
-						kokapena = eElement.getElementsByTagName("KOKAPENA").item(0).getTextContent();
-						eraikuntza_zbk = eElement.getElementsByTagName("ERAIKUNTZA_ZBK").item(0).getTextContent();
-						irakasle_kop = eElement.getElementsByTagName("IRAKASLE_KOP").item(0).getTextContent();
-
-						Departamentua dept = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk,
-								irakasle_kop);
-						lista_dept.add(dept);
-					}
-				}
-			} catch (SAXException e) {
-				JOptionPane.showMessageDialog(null, "Ez duzu fitxero zuzena sartu", "ERROREA", 0);
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
-			}
-		} catch (ParserConfigurationException e) {
-			JOptionPane.showMessageDialog(null, "Errorea", "ERROREA", 0);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
-		}
-		return lista_dept;
-	}
-
+	
 	public static void idatziLangileakPDF(ArrayList<Langilea> lista_langileak) {
 		/* try {
 	            // Nombre del archivo FO
