@@ -38,6 +38,10 @@ public class MetodoakFitxIrakurri {
 		return eredua.FitxKudeaketaDepartamentuak.irakurriDeptXML(helbidea);
 	}
 	
+	public static ArrayList<Departamentua> irakurriDeptCSVMet(String helbidea) {
+		return eredua.FitxKudeaketaDepartamentuak.irakurriDeptCSV(helbidea);
+	}
+	
 	/*public static ArrayList<Langilea> irakurriDeptJSONMet(ArrayList<Departamentua> lista_dept) {
 		return eredua.FitxKudeaketaDepartamentuak.irakurriDeptJSON(lista_dept);
 	}*/

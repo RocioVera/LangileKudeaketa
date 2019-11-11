@@ -120,9 +120,6 @@ public class FitxKudeaketaDepartamentuak {
 		return lista_dept;
 	}
 
-
-	
-	
 	public static void idatziDeptXML(ArrayList<Departamentua> lista_dept) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
