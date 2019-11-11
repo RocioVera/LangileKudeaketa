@@ -26,7 +26,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+//import org.json.simple.parser.ParseException;
 //
 //import org.apache.fop.apps.FOUserAgent;
 //import org.apache.fop.apps.FopFactory;
@@ -260,7 +260,13 @@ public class FitxKudeaketaLangilea {
 		
 		try { 
 			FileReader reader = new FileReader(helbidea);
-			Object obj = parser.parse(reader);
+			Object obj = null;
+			try {
+				obj = parser.parse(reader);
+			} catch (org.json.simple.parser.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			JSONArray employeeList = (JSONArray) obj;
 			employeeList.forEach(emp -> parseOharrakObject((JSONObject) emp));
 
@@ -268,7 +274,7 @@ public class FitxKudeaketaLangilea {
 		(FileNotFoundException e) { e.printStackTrace();
 
 		}catch (IOException e) {
-			e.printStackTrace(); } catch (ParseException e) { e.printStackTrace(); }
+			e.printStackTrace(); }
 
 		File fitxeroa = new File(helbidea); DocumentBuilderFactory dbFactory =
 				DocumentBuilderFactory.newInstance(); DocumentBuilder dBuilder; Document doc
