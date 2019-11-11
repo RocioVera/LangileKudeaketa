@@ -18,9 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import eredua.Langilea;
-import kontrolatzailea.Metodoak;
-import kontrolatzailea.MetodoakBBDD;
-import kontrolatzailea.MetodoakLeihoAldaketa;
+
+import kontrolatzailea.*;
 
 public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 
@@ -32,7 +31,7 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 	private JComboBox jcbDeptKod, jcbArdura;
 	private JButton btnGorde, btnEzeztatu, btnKargatuFitxategia;
 	private ArrayList<String> ardura, deptKod;
-	private final static Logger logger = Logger.getLogger(Leiho3LangileKudeaketa_Gehitu.class);
+	//private final static Logger logger = Logger.getLogger(Leiho3LangileKudeaketa_Gehitu.class);
 
 
 	public Leiho3LangileKudeaketa_Gehitu() {
@@ -162,7 +161,7 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		}
 		getContentPane().add(jcbDeptKod);
 
-		ardura = Metodoak.arrayListArduraSortu();
+		ardura = kontrolatzailea.Metodoak.arrayListArduraSortu();
 		jcbArdura = new JComboBox();
 		jcbArdura.setForeground(Color.BLACK);
 		jcbArdura.setFont(new Font("Dialog", Font.PLAIN, 16));

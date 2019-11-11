@@ -2,6 +2,7 @@ package kontrolatzailea;
 
 import eredua.*;
 import ikuspegia.*;
+import ikuspegia.Leiho1OngiEtorria;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
