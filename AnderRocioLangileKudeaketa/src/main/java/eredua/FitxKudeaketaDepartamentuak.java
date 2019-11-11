@@ -128,7 +128,7 @@ public class FitxKudeaketaDepartamentuak {
 
 	// .json an dauden lerroak arraylist batean sartu
 	public static ArrayList<Departamentua> irakurriDeptJSON(String helbidea) {
-		
+		parseDeptObject
 		JSONParser jsonParser = new JSONParser();
 
 		try (FileReader reader = new FileReader(helbidea)) {
