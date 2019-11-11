@@ -17,7 +17,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 
 		try {
-			s = konexioa.prepareStatement("select *  from LANGILEAK");
+			s = konexioa.prepareStatement("select *  from langileak");
 			ResultSet rs = s.executeQuery();
 			String nan, izena, abizenak, ardura, arduraduna, departamentua;
 
@@ -47,7 +47,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 
 		try {
-			s = konexioa.prepareStatement("select DISTINCT(DEPART_KOD) from DEPARTAMENTUAK");
+			s = konexioa.prepareStatement("select DISTINCT(DEPART_KOD) from departamentuak");
 			ResultSet rs = s.executeQuery();
 
 			while (rs.next()) {				
@@ -122,7 +122,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"DELETE FROM `LANGILEAK` WHERE `NAN` LIKE ?");
+					"DELETE FROM `langileak` WHERE `NAN` LIKE ?");
 			s.setString(1, langile.getNan());
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
@@ -140,7 +140,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"UPDATE `LANGILEAK` SET `NAN`=?,`IZENA`=?,`ABIZENAK`=?,`ARDURA`=?,`ARDURADUNA`=?,`DEPARTAMENTUAK_DEPART_KOD`=? WHERE `NAN`= '"+langile.getNan()+"'");
+					"UPDATE `langileak` SET `NAN`=?,`IZENA`=?,`ABIZENAK`=?,`ARDURA`=?,`ARDURADUNA`=?,`DEPARTAMENTUAK_DEPART_KOD`=? WHERE `NAN`= '"+langile.getNan()+"'");
 			s.setString(1, langile.getNan());
 			s.setString(2, langile.getIzena());
 			s.setString(3, langile.getAbizenak());
@@ -171,7 +171,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 
 		try {
-			s = konexioa.prepareStatement("select *  from DEPARTAMENTUAK");
+			s = konexioa.prepareStatement("select *  from departamentuak");
 			ResultSet rs = s.executeQuery();
 			String izena, departKod, kokapena, eraikuntzaZbk, irakasleKop;
 
@@ -199,7 +199,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"INSERT INTO `DEPARTAMENTUAK`(`DEPART_KOD`, `IZENA`, `KOKAPENA`, `ERAIKUNTZA_ZBK`, `IRAKASLE_KOP`)"
+					"INSERT INTO `departamentuak`(`DEPART_KOD`, `IZENA`, `KOKAPENA`, `ERAIKUNTZA_ZBK`, `IRAKASLE_KOP`)"
 							+ " VALUES(?, ?, ?, ?, ?)");
 			s.setString(1, dept.getDepart_kod());
 			s.setString(2, dept.getIzena());
@@ -223,7 +223,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"DELETE FROM `DEPARTAMENTUAK` WHERE `DEPART_KOD` LIKE ?");
+					"DELETE FROM `departamentuak` WHERE `DEPART_KOD` LIKE ?");
 			s.setString(1, dept.getDepart_kod());
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
@@ -241,7 +241,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
 			s = konexioa.prepareStatement(
-					"UPDATE `DEPARTAMENTUAK` SET `DEPART_KOD`=?,`IZENA`=?,`KOKAPENA`=?,`ERAIKUNTZA_ZBK`=?,`IRAKASLE_KOP`=? WHERE `DEPART_KOD`= '"+dept.getDepart_kod()+"'");
+					"UPDATE `departamentuak` SET `DEPART_KOD`=?,`IZENA`=?,`KOKAPENA`=?,`ERAIKUNTZA_ZBK`=?,`IRAKASLE_KOP`=? WHERE `DEPART_KOD`= '"+dept.getDepart_kod()+"'");
 			s.setString(1, dept.getDepart_kod());
 			s.setString(2, dept.getIzena());
 			s.setString(3, dept.getKokapena());

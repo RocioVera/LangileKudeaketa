@@ -20,10 +20,12 @@ public class Metodoak {
 	}
 	
 	public static ArrayList<Langilea> ateraLangileak() {
-		return kontrolatzailea.MetodoakBBDD.langileTaulaIrakurri();
+		MetodoakLeihoAldaketa.lista_langileak = kontrolatzailea.MetodoakBBDD.langileTaulaIrakurri();
+		return MetodoakLeihoAldaketa.lista_langileak;
 	}
 	
 	public static ArrayList<Departamentua> ateraDept() {
-		return kontrolatzailea.MetodoakBBDD.deptTaulaIrakurri();
+		MetodoakLeihoAldaketa.lista_departamentuak = kontrolatzailea.MetodoakBBDD.deptTaulaIrakurri();
+		return MetodoakLeihoAldaketa.lista_departamentuak;
 	}
 }

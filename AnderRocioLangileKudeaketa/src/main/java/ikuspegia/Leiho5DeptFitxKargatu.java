@@ -90,14 +90,14 @@ public class Leiho5DeptFitxKargatu extends JFrame {
 							.irakurriDeptCSVMet(fitxategia.getAbsolutePath() + "");
 					kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
 					
-				}else if ("json".equals(comboBox.getSelectedItem().toString())) {
+				}/* else if ("json".equals(comboBox.getSelectedItem().toString())) {
 					kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak = kontrolatzailea.MetodoakFitxIrakurri
-							.irakurriDeptJSONMet(fitxategia.getAbsolutePath() + "");
+							.irakurriLangileakJSONMet(fitxategia.getAbsolutePath() + "");
 					kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
 					
 				} else {
 					System.out.println("Erroa Aukerarekin");
-				}
+				}*/
 			}
 		});
 		btnKargatu.setFont(new Font("Tahoma", Font.BOLD, 15));
