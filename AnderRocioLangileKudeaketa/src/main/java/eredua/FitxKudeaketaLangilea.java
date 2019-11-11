@@ -268,19 +268,19 @@ public class FitxKudeaketaLangilea {
 			}
 			JSONArray langilelista = (JSONArray) obj;
 			for (Object objet : langilelista) {
-				JSONObject langile = (JSONObject) objet;
-
-				String nan= langile.get("NAN").toString();
-				String izena = langile.getString("IZENA"); 
-				String abizenak =  langile.getString("ABIZENAK"); 
-				String ardura =  langile.getString("ARDURA"); 
-				String arduraduna =  langile.getString("ARDURADUNA");
-				String depart_kod =  langile.getString("DEPARTAMENTUAK_DEPART_KOD");
-
-				
-				Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna,
-						depart_kod);
-				kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.add(langilea);
+//				JSONObject langile = (JSONObject) objet;
+//
+//				String nan= langile.get("NAN").toString();
+//				String izena = langile.getString("IZENA"); 
+//				String abizenak =  langile.getString("ABIZENAK"); 
+//				String ardura =  langile.getString("ARDURA"); 
+//				String arduraduna =  langile.getString("ARDURADUNA");
+//				String depart_kod =  langile.getString("DEPARTAMENTUAK_DEPART_KOD");
+//
+//				
+//				Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna,
+//						depart_kod);
+//				kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.add(langilea);
 
 	        }
 			
