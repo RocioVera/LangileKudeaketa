@@ -16,7 +16,7 @@ public class MetodoakFitxIrakurri {
 	}
 
 	public static ArrayList<Langilea> irakurriLangileakJSONMet(String helbidea) {
-		return eredua.FitxKudeaketaLangilea.irakurriLangileakJSON(helbidea);
+		return eredua.FitxKudeaketaLangilea.irakurriLangileaJSON(helbidea);
 	}
 	
 	//FITXEROA SORTU

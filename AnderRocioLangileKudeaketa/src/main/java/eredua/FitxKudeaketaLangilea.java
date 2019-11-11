@@ -248,7 +248,7 @@ public class FitxKudeaketaLangilea {
 	}
 
 	// .json an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriLangileaJSON(String helbidea) {
+	public static ArrayList<Langilea> irakurriLangileaJSON(String helbidea) {
 		
 		JSONParser jsonParser = new JSONParser();
 
@@ -267,7 +267,7 @@ public class FitxKudeaketaLangilea {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return MetodoakLeihoAldaketa.lista_departamentuak;
+		return MetodoakLeihoAldaketa.lista_langileak;
 	}
 	
 	private static void parseLangileObject(JSONObject employee) {
