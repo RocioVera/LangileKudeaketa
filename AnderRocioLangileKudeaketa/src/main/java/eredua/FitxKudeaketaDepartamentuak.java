@@ -30,7 +30,13 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
-import jdk.nashorn.internal.parser.JSONParser;
+import kontrolatzailea.MetodoakBBDD;
+import kontrolatzailea.MetodoakLeihoAldaketa;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class FitxKudeaketaDepartamentuak {
 
@@ -120,6 +126,40 @@ public class FitxKudeaketaDepartamentuak {
 		return lista_dept;
 	}
 
+	// .json an dauden lerroak arraylist batean sartu
+	public static ArrayList<Departamentua> irakurriDeptJSON(String helbidea) {
+		
+		JSONParser jsonParser = new JSONParser();
+
+		try (FileReader reader = new FileReader(helbidea)) {
+			Object obj = jsonParser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp -> parseDeptObject((JSONObject) emp));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return MetodoakLeihoAldaketa.lista_departamentuak;
+	}
+	
+	private static void parseDeptObject(JSONObject employee) {
+		JSONObject oharraObject = (JSONObject) employee.get("DEPARTAMENTUAK");
+
+		String depart_kod = (String) oharraObject.get("DEPART_KOD");
+		String izena = (String) oharraObject.get("IZENA");
+		String kokapena = (String) oharraObject.get("KOKAPENA");
+		String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
+		String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
+
+		Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
+		MetodoakLeihoAldaketa.lista_departamentuak.add(departamentua);
+	}
+	
+	
+	
 	public static void idatziDeptXML(ArrayList<Departamentua> lista_dept) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
