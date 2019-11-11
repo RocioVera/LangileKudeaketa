@@ -113,11 +113,11 @@ public class FitxKudeaketaLangilea {
 						+ lista_langileak.get(i).getDepartamentu_kod() + "\"");
 				bw.flush(); // csv-an idatzitakoa gortzeko
 			}
-			JOptionPane.showMessageDialog(null, "CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile CSV fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 
 		} catch (IOException e) {
 			// e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile CSV fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 
 		}
 	}
@@ -239,13 +239,13 @@ public class FitxKudeaketaLangilea {
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			JOptionPane.showMessageDialog(null, "XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile XML fitxeroa ondo sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		} catch (TransformerFactoryConfigurationError e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
+			JOptionPane.showMessageDialog(null, "Langile XML fitxeroa txarto sortuta", "XML fitxeroa sortuta", 0);
 		}
 
 	}
@@ -330,9 +330,7 @@ public class FitxKudeaketaLangilea {
 
 	// .xml aren amaieran idazten du.
 
-	public static int idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
-		int idatzita = 0;
-
+	public static void idatziLangileak(ArrayList<Langilea> lista_langileak, String helbidea) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		try {
@@ -399,7 +397,6 @@ public class FitxKudeaketaLangilea {
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.transform(source, result);
-			idatzita = 1;
 		} catch (TransformerException e) {
 			JOptionPane.showMessageDialog(null, "Errorea fitxeroa transformatzerakoan", "konbertsio errorea", 0);
 
@@ -409,97 +406,10 @@ public class FitxKudeaketaLangilea {
 			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
 		}
 
-		return idatzita;
 	}
 
 	// DEPARTAMENTUAK
-	// .csv an dauden lerroak arraylist batean sartu
-
-	// DEPARTAMENTUAK
-	public static ArrayList<Departamentua> irakurriDeptCSV(String helbidea) {
-		// bariableak
-		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
-		FileReader fitxeroa = null;
-		BufferedReader br = null;
-		try { // aurkitzen duen ala ez
-			fitxeroa = new FileReader(helbidea);
-			br = new BufferedReader(fitxeroa);
-			// Langilearen bariableak
-			String katea[];
-			String depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop;
-			try {
-
-				String linea = br.readLine();
-				while ((linea = br.readLine()) != null) {
-					// lerro zuriak ez irakurtzeko
-					katea = linea.split(",");
-					depart_kod = katea[0].replace("\"", "");
-					izena = katea[1].replace("\"", "");
-					kokapena = katea[2].replace("\"", "");
-					eraikuntza_zbk = katea[3].replace("\"", "");
-					irakasle_kop = katea[4].replace("\"", "");
-
-					Departamentua dept = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-					lista_dept.add(dept);
-				}
-				br.close();
-				fitxeroa.close();
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Errorea", "Errorea", 0);
-			}
-		} catch (FileNotFoundException e1) {
-			JOptionPane.showMessageDialog(null, "Ez da fitxeroa aurkitzen", "ERROREA", 0);
-		}
-
-		return lista_dept;
-	}
-
-	// .xml an dauden lerroak arraylist batean sartu
-	public static ArrayList<Departamentua> irakurriDeptXML(String helbidea) {
-		// bariableak
-		ArrayList<Departamentua> lista_dept = new ArrayList<Departamentua>();
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
-		Document doc = null;
-
-		String depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop;
-
-		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-			try {
-				doc = dBuilder.parse(helbidea);
-				doc.getDocumentElement().normalize();
-				NodeList lista = doc.getElementsByTagName("DEPARTAMENTUAK");
-				for (int temp = 0; temp < lista.getLength(); temp++) {
-					Node nNode = lista.item(temp);
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						depart_kod = eElement.getElementsByTagName("DEPART_KOD").item(0).getTextContent();
-						izena = eElement.getElementsByTagName("IZENA").item(0).getTextContent();
-						kokapena = eElement.getElementsByTagName("KOKAPENA").item(0).getTextContent();
-						eraikuntza_zbk = eElement.getElementsByTagName("ERAIKUNTZA_ZBK").item(0).getTextContent();
-						irakasle_kop = eElement.getElementsByTagName("IRAKASLE_KOP").item(0).getTextContent();
-
-						Departamentua dept = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk,
-								irakasle_kop);
-						lista_dept.add(dept);
-					}
-				}
-			} catch (SAXException e) {
-				JOptionPane.showMessageDialog(null, "Ez duzu fitxero zuzena sartu", "ERROREA", 0);
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
-			}
-		} catch (ParserConfigurationException e) {
-			JOptionPane.showMessageDialog(null, "Errorea", "ERROREA", 0);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "ERROREA", "ERROREA", 0);
-		}
-		return lista_dept;
-	}
-
+	
 	public static void idatziLangileakPDF(ArrayList<Langilea> lista_langileak) {
 		/* try {
 	            // Nombre del archivo FO

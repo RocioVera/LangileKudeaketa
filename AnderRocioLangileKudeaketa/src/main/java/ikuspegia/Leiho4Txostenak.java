@@ -70,10 +70,12 @@ public class Leiho4Txostenak extends JFrame {
 		btnFitxeroaSortu = new JButton("Fitxeroa sortu");
 		btnFitxeroaSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// SORTU
-				MetodoakFitxIrakurri.idatziXMLMet(ateraLangileak);
+				MetodoakFitxIrakurri.idatziLangileakXMLMet(ateraLangileak);
 				MetodoakFitxIrakurri.idatziLangileakCSVMet(ateraLangileak);
 				MetodoakFitxIrakurri.idatziLangileakPDFMet(ateraLangileak);
+				
+				MetodoakFitxIrakurri.idatziDeptCSVMet(ateraDepartamentuak);
+				MetodoakFitxIrakurri.idatziDeptXMLMet(ateraDepartamentuak);
 			}
 		});
 		btnFitxeroaSortu.setBounds(10, 483, 128, 23);
