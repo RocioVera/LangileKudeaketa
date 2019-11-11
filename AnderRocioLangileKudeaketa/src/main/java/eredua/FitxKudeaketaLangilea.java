@@ -273,12 +273,12 @@ public class FitxKudeaketaLangilea {
 	private static void parseLangileObject(JSONObject employee) {
 		JSONObject oharraObject = (org.json.simple.JSONObject) employee.get("LANGILEAK");
 
-		String nan= (String) employee.get("NAN");
-		String izena= (String) employee.get("IZENA");
-		String abizenak=(String)  employee.get("ABIZENAK");
-		String ardura=(String)  employee.get("ARDURA");
-		String arduraduna=(String)  employee.get("ARDURADUNA");
-		String departamentu_kod=(String)  employee.get("DEPARTAMENTUAK_DEPART_KOD");
+		String nan= (String) oharraObject.get("NAN");
+		String izena= (String) oharraObject.get("IZENA");
+		String abizenak=(String)  oharraObject.get("ABIZENAK");
+		String ardura=(String)  oharraObject.get("ARDURA");
+		String arduraduna=(String)  oharraObject.get("ARDURADUNA");
+		String departamentu_kod=(String)  oharraObject.get("DEPARTAMENTUAK_DEPART_KOD");
 
 		
 

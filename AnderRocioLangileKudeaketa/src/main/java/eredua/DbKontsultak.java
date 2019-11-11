@@ -112,7 +112,7 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Fitxeroa ez da gehitu", "SQL Insert Message", 0);
-			//System.out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 
 	}
