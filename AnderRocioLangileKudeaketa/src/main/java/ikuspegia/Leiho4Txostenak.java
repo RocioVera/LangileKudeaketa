@@ -42,14 +42,15 @@ public class Leiho4Txostenak extends JFrame {
 		// TEXTAREA
 		arrayTxtA = new JTextArea();
 		arrayTxtA.setEditable(false);
+
 		for (int i = 0; i < ateraLangileak.size(); i++) {
 			arrayTxtA.setText(arrayTxtA.getText() + ateraLangileak.get(i).toString());
 		}
 		for (int i = 0; i < ateraDepartamentuak.size(); i++) {
 			arrayTxtA.setText(arrayTxtA.getText() + ateraDepartamentuak.get(i).toString());
 		}
+		
 		arrayTxtA.setBounds(26, 11, 558, 503);
-
 		scrollPane = new JScrollPane(arrayTxtA);
 		scrollPane.setBounds(10, 11, 372, 467);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
