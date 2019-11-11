@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import eredua.Langilea;
 import kontrolatzailea.Metodoak;
@@ -33,7 +33,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 	private JComboBox jcbDeptKod, jcbArdura;
 	private JButton btnGorde, btnEzeztatu;
 	private ArrayList<String> ardura, deptKod;
-//	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
+	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
 
 
 	public Leiho3LangileKudeaketa_Update(final Langilea langile) {
@@ -81,7 +81,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 				String cadena = letraIzena + "";
 				if (txtIzena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
 					e.consume(); // ez du godetzen
-//					logger.info("Langilea aldatzerakoan izena lekuan: " + e +" sartu du.");
+					logger.info("Langilea aldatzerakoan izena lekuan: " + e +" sartu du.");
 				}
 				langile.setIzena(txtIzena.getText()+"");
 			}
@@ -105,7 +105,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 				String cadena = letraAbizena + "";
 				if (txtAbizena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
 					e.consume(); // ez du godetzen
-//					logger.info("Langilea aldatzerakoan abizena lekuan: " + e +" sartu du.");
+					logger.info("Langilea aldatzerakoan abizena lekuan: " + e +" sartu du.");
 				}
 				langile.setAbizenak(txtAbizena.getText()+"");
 
@@ -141,7 +141,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 				String cadena = letraArduraduna + "";
 				if (txtArduraduna.getText().length() > 8 || !cadena.matches("[0-9A-Z]")){
 					e.consume(); // ez du godetzen
-//					logger.info("Langilea aldatzerakoan arduraduna lekuan: " + e +" sartu du.");
+					logger.info("Langilea aldatzerakoan arduraduna lekuan: " + e +" sartu du.");
 				}
 				if (cadena.matches("[a-z]")) {
 					JOptionPane.showMessageDialog(null, "Letra larria sartu behar da", "Errorea", 0);
