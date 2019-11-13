@@ -1,11 +1,14 @@
-package ikuspegia;
+	package ikuspegia;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+import java.io.File;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,16 +17,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import com.itextpdf.text.pdf.codec.Base64.InputStream;
+
 import eredua.Departamentua;
 import eredua.Konexioa;
 import eredua.Langilea;
 import kontrolatzailea.MetodoakFitxIrakurri;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 
 public class Leiho4Txostenak extends JFrame {
 
@@ -78,20 +92,29 @@ public class Leiho4Txostenak extends JFrame {
 		btnFitxeroaSortu = new JButton("Fitxeroa sortu");
 		btnFitxeroaSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MetodoakFitxIrakurri.idatziLangileakXMLMet(ateraLangileak);
-				MetodoakFitxIrakurri.idatziLangileakCSVMet(ateraLangileak);
-				MetodoakFitxIrakurri.idatziLangileakPDFMet(ateraLangileak);
-				
-				MetodoakFitxIrakurri.idatziDeptCSVMet(ateraDepartamentuak);
-				MetodoakFitxIrakurri.idatziDeptXMLMet(ateraDepartamentuak);
+//				MetodoakFitxIrakurri.idatziLangileakXMLMet(ateraLangileak);
+//				MetodoakFitxIrakurri.idatziLangileakCSVMet(ateraLangileak);
+//				MetodoakFitxIrakurri.idatziLangileakPDFMet(ateraLangileak);
+//				
+//				MetodoakFitxIrakurri.idatziDeptCSVMet(ateraDepartamentuak);
+//				MetodoakFitxIrakurri.idatziDeptXMLMet(ateraDepartamentuak);
 				Konexioa conn = new Konexioa();
-	
+
+				
 				try {
-					JasperReport report = JasperCompileManager.compileReport("C:\\Users\\ander\\git\\LangileKudeaketa2\\AnderRocioLangileKudeaketa\\src\\main\\java\\fitxategiak\\Departamentuak.jrxml");
-					JasperPrint print = JasperFillManager.fillReport(report, null);
-					JasperExportManager.exportReportToPdfFile(print, "C:\\Users\\");
-					//Konexioa.getKonexioa().close();
-				} catch (JRException  e1) {
+					Map parameters = new HashMap();
+					
+					
+					InputStream is=(InputStream) this.getClass().getResourceAsStream("\\src\\main\\java\\fitxategiak\\Departamentuak.jasper");
+					
+					
+					JasperReport reporte = JasperCompileManager.compileReport(is);
+					String path= "\\src\\main\\java\\fitxategiak\\Departamentuak.jrxml";
+					
+					
+					JasperPrint print = JasperFillManager.fillReport(reporte, parameters,(Connection) conn);
+					JasperExportManager.exportReportToPdfFile(print, "\\src\\main\\java\\fitxategiakSortuta");
+				} catch (JRException e1) {
 				
 					e1.printStackTrace();
 				}
