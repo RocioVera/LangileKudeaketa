@@ -27,7 +27,7 @@ import jdk.nashorn.internal.runtime.ListAdapter;
 public class Leiho2LangileKudeaketa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	protected static final Vector constante = null;
-	private JButton btnKargatuFitxategia, btnIrten = new JButton("Irten"),
+	private JButton btnKargatuFitxategia, btnIrten = new JButton("Irten"), plus = new JButton("+"),
 			btnReload = new JButton("Reload");
 	private JTable taula;
 	private JLabel lblDepartamentuKudeaketa = new JLabel("Langile Kudeaketa");
@@ -82,6 +82,24 @@ public class Leiho2LangileKudeaketa extends JFrame {
 			}
 		});
 		getContentPane().add(btnKargatuFitxategia);
+
+		plus.setForeground(Color.BLACK);
+		plus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean froga = false;
+				for (int i = 0; i < t1.getColumnCount(); i++) {
+					System.out.println(t1.getValueAt(0, i));
+					if (t1.getValueAt(t1.getRowCount() - 1, i) == null)
+						froga = true;
+				}
+				if (!froga)
+					t1.addRow(constante);
+
+			}
+		});
+		plus.setFont(new Font("Tahoma", Font.BOLD, 11));
+		plus.setBounds(738, 109, 47, 35);
+		getContentPane().add(plus);
 
 		btnInsert.setForeground(Color.BLACK);
 		btnInsert.addActionListener(new ActionListener() {
