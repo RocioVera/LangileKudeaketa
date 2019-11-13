@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -14,8 +15,15 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 import eredua.Departamentua;
+import eredua.Konexioa;
 import eredua.Langilea;
 import kontrolatzailea.MetodoakFitxIrakurri;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 public class Leiho4Txostenak extends JFrame {
 
@@ -76,6 +84,20 @@ public class Leiho4Txostenak extends JFrame {
 				
 				MetodoakFitxIrakurri.idatziDeptCSVMet(ateraDepartamentuak);
 				MetodoakFitxIrakurri.idatziDeptXMLMet(ateraDepartamentuak);
+				Konexioa conn = new Konexioa();
+	
+				try {
+					JasperReport report = JasperCompileManager.compileReport("C:\\Users\\ander\\git\\LangileKudeaketa2\\AnderRocioLangileKudeaketa\\src\\main\\java\\fitxategiak\\Departamentuak.jrxml");
+					JasperPrint print = JasperFillManager.fillReport(report, null);
+					JasperExportManager.exportReportToPdfFile(print, "C:\\Users\\");
+					//Konexioa.getKonexioa().close();
+				} catch (JRException  e1) {
+				
+					e1.printStackTrace();
+				}
+				
+				
+				
 			}
 		});
 		btnFitxeroaSortu.setBounds(10, 483, 128, 23);

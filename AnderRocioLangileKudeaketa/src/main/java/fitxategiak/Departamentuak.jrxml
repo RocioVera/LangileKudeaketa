@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Txostena" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7eebaa4-068b-407f-bf7a-d4c2e72a1292">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conector"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  *  FROM DEPARTAMENTUAK]]>
+	</queryString>
+	<field name="DEPART_KOD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPART_KOD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departamentuak"/>
+	</field>
+	<field name="IZENA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IZENA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departamentuak"/>
+	</field>
+	<field name="KOKAPENA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="KOKAPENA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departamentuak"/>
+	</field>
+	<field name="ERAIKUNTZA_ZBK" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ERAIKUNTZA_ZBK"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departamentuak"/>
+	</field>
+	<field name="IRAKASLE_KOP" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IRAKASLE_KOP"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="departamentuak"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="d7cb9de5-f1d6-4e9a-8441-72f5e2127742"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="3eb8e1ab-7e38-4368-89db-62b6501a8c67"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Green Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="100" y="46" width="174" height="22" uuid="0b5308cc-82cf-49a0-8011-6f875d4c5e32"/>
+				<text><![CDATA[Leaf Green SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="d69c6691-e92e-45c5-bf2d-c1dc15dabb91"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="111" height="15" uuid="81dc294f-a16c-460f-ad3c-4a5c31136c67">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fb1e39c-971f-4485-802d-36a06f27d8b2"/>
+				</reportElement>
+				<text><![CDATA[DEPART_KOD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="19" width="111" height="15" uuid="20f8f851-9c7c-4d1f-8eb2-5e725941b2ed">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ebf3050a-99b7-49b2-9c78-4329167a71e4"/>
+				</reportElement>
+				<text><![CDATA[IZENA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="222" y="19" width="111" height="15" uuid="6ccf718b-f922-467a-b9af-e7d337a89273">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcb06c62-a8de-4485-8348-e2554812d58d"/>
+				</reportElement>
+				<text><![CDATA[KOKAPENA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="333" y="19" width="111" height="15" uuid="130e36cc-b409-4b43-aadb-637762bfa0fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b85f8233-5fde-4652-a07c-2b71738643a4"/>
+				</reportElement>
+				<text><![CDATA[ERAIKUNTZA_ZBK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="19" width="111" height="15" uuid="a8b55691-eeca-4a70-842a-fa0d719b90d6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0d73fe5a-e357-49a5-b7ba-8e82bab1f615"/>
+				</reportElement>
+				<text><![CDATA[IRAKASLE_KOP]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="f367c019-9cb7-431c-8713-5a96f9b889aa"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="111" height="15" uuid="baf1f72b-8966-4e56-8a39-3a1587256822">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fb1e39c-971f-4485-802d-36a06f27d8b2"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{DEPART_KOD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="111" height="15" uuid="c9d8c69a-2730-431a-af22-dd066c16ba57">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ebf3050a-99b7-49b2-9c78-4329167a71e4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{IZENA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="222" y="0" width="111" height="15" uuid="363061b7-526a-4a0e-84e3-a150ed6c43fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcb06c62-a8de-4485-8348-e2554812d58d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{KOKAPENA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="333" y="0" width="111" height="15" uuid="37bbd4a4-f5db-42ff-b1e9-7871d1673ec2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b85f8233-5fde-4652-a07c-2b71738643a4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ERAIKUNTZA_ZBK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="444" y="0" width="111" height="15" uuid="75ccc5a1-0e9e-46d7-8b42-61613b7b04b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0d73fe5a-e357-49a5-b7ba-8e82bab1f615"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{IRAKASLE_KOP}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="90" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="02519f40-8679-4e40-a1f1-699bc025a206"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="216" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="6f13e17d-4b46-4ede-ab63-9d2685ec9c16"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="6857db7e-824a-4cda-b8dc-fe5c95aca145"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="ef9fc35f-c45f-4ec6-a5cc-ec2020109ea7"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
