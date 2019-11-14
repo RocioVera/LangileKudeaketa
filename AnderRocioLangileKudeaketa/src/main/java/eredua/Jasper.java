@@ -23,31 +23,35 @@ public class Jasper {
 		JRPdfExporter exp = new JRPdfExporter();
 
 		exp.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exp.setExporterOutput(new SimpleOutputStreamExporterOutput("departamentua.pdf"));
+		exp.setExporterOutput(new SimpleOutputStreamExporterOutput("./AnderRocioLangileKudeaketa/src/main/java/fitxategiakSortuta/Departamentua.pdf"));
 		SimplePdfExporterConfiguration conf = new SimplePdfExporterConfiguration();
 		exp.setConfiguration(conf);
 		exp.exportReport();
 
+		/*
 		// se muestra en una ventana aparte para su descarga
 		JasperPrint jasperPrintWindow = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Departamentuak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
 		jasperViewer.setVisible(true);
+		*/
 		
 		JasperPrint jasperPrint2 = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Langileak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JRPdfExporter exp2 = new JRPdfExporter();
 		exp2.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exp2.setExporterOutput(new SimpleOutputStreamExporterOutput("enplegatua.pdf"));
+		exp2.setExporterOutput(new SimpleOutputStreamExporterOutput("./AnderRocioLangileKudeaketa/src/main/java/fitxategiakSortuta/Langileak.pdf"));
 		SimplePdfExporterConfiguration conf2 = new SimplePdfExporterConfiguration();
 		exp2.setConfiguration(conf2);
 		exp2.exportReport();
 
+		/*
 		// se muestra en una ventana aparte para su descarga
 		JasperPrint jasperPrintWindow2 = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Langileak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JasperViewer jasperViewer2 = new JasperViewer(jasperPrintWindow2);
 		jasperViewer2.setVisible(true);
+		*/
 		
 	}
 }
