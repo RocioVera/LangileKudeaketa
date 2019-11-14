@@ -257,7 +257,7 @@ public class FitxKudeaketaLangilea {
 			try {
 				obj = jsonParser.parse(reader);
 			} catch (org.json.simple.parser.ParseException e) {
-				
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JSONArray employeeList = (JSONArray) obj;
@@ -271,19 +271,16 @@ public class FitxKudeaketaLangilea {
 	}
 	
 	private static void parseLangileObject(JSONObject employee) {
-		JSONObject oharraObject = (org.json.simple.JSONObject) employee.get("LANGILEAK");
+		JSONObject oharraObject = (JSONObject) employee.get("DEPARTAMENTUAK");
 
-		String nan= (String) oharraObject.get("NAN");
-		String izena= (String) oharraObject.get("IZENA");
-		String abizenak=(String)  oharraObject.get("ABIZENAK");
-		String ardura=(String)  oharraObject.get("ARDURA");
-		String arduraduna=(String)  oharraObject.get("ARDURADUNA");
-		String departamentu_kod=(String)  oharraObject.get("DEPARTAMENTUAK_DEPART_KOD");
+		String depart_kod = (String) oharraObject.get("DEPART_KOD");
+		String izena = (String) oharraObject.get("IZENA");
+		String kokapena = (String) oharraObject.get("KOKAPENA");
+		String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
+		String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
 
-		
-
-		Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna, departamentu_kod);
-		MetodoakLeihoAldaketa.lista_langileak.add(langilea);
+		Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
+		MetodoakLeihoAldaketa.lista_departamentuak.add(departamentua);
 	}
 	
 	
