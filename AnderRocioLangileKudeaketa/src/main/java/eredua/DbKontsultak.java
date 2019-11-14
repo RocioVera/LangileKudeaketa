@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
-import kontrolatzailea.MetodoakLeihoAldaketa;;
+import org.apache.log4j.Logger;
+import ikuspegia.Leiho2LangileKudeaketa;
 
 public class DbKontsultak {
-	
+	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
+
 	public static ArrayList<Langilea> langileTaulaIrakurri() {
 		ArrayList<Langilea> lista_langilea = new ArrayList<Langilea>();
 		PreparedStatement s = null;
@@ -36,7 +37,8 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			e.getMessage();
-			//System.out.println(e.getMessage());
+			logger.info("Langileak kodeak ateratzerakoan errorea");
+
 		}
 		return lista_langilea;
 	}
@@ -58,7 +60,7 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			e.getMessage();
-			//System.out.println(e.getMessage());
+			logger.info("Departamentu kodeak ateratzerakoan errorea");
 		}
 		
 		return listaDeptKod;
@@ -83,9 +85,8 @@ public class DbKontsultak {
 			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Insert Message", 0);
 
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Insert Message", 0);
-
+			logger.info("Langileak DB idaztekorakoan errorea");
 		}
 
 	}
@@ -113,7 +114,7 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Fitxeroa ez da gehitu", "SQL Insert Message", 0);
-			System.out.println(e.getMessage());
+			logger.info("Langile asko sartzerakoan errorea.");
 		}
 
 	}
@@ -132,6 +133,8 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Langilea ez da ondo ezabatu", "SQL Delete Message", 0);
+			logger.info("Langilea DB-tik ezabatzerakoan errorea");
+
 		}
 
 	}
@@ -157,13 +160,11 @@ public class DbKontsultak {
 
 
 		} catch (Exception e) {
-		//	System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Ez da aldatu", "SQL Update Message", 0);
-
+			logger.info("Langilea DB-tik aldatzerakoan errorea");
 		}
 
 	}
-	
 	
 	//DEPARTAMENTUAK
 	public static ArrayList<Departamentua> deptTaulaIrakurri() {
@@ -190,7 +191,7 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			e.getMessage();
-			//System.out.println(e.getMessage());
+			logger.info("Departamentuak DB-tik irakurtzerakoan errorea");
 		}
 		return lista_depart;
 	}
@@ -213,8 +214,9 @@ public class DbKontsultak {
 			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Insert Message", 0);
 
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Insert Message", 0);
+			logger.info("DB-ko departamentu taulara idazterakoan errorea");
+
 		}
 
 	}
@@ -233,6 +235,8 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Departamentua ez da ondo ezabatu", "SQL Delete Message", 0);
+			logger.info("Departamentu DB-tik ezabatzerakoan errorea");
+
 		}
 
 	}
@@ -257,6 +261,8 @@ public class DbKontsultak {
 		} catch (Exception e) {
 			//System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Ez da aldatu", "SQL Update Message", 0);
+			logger.info("Departamentua DB-tik aldatzerakoan errorea");
+
 
 		}
 
@@ -284,11 +290,9 @@ public class DbKontsultak {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Fitxeroa ez da gehitu", "SQL Insert Message", 0);
-			System.out.println(e.getMessage());
+			logger.info("Departamentu asko sartzerakoan errorea.");
 		}
 
 	}
-
-
 
 }
