@@ -30,9 +30,14 @@ public class Leiho2LangileKudeaketa extends JFrame {
 	private JButton btnKargatuFitxategia, btnIrten = new JButton("Irten"), plus = new JButton("+"),
 			btnReload = new JButton("Reload");
 	private JTable taula;
+
 	private JLabel lblDepartamentuKudeaketa = new JLabel("Langile Kudeaketa");
 	private JScrollPane scrollPane = new JScrollPane();
-	private DefaultTableModel t1 = new DefaultTableModel();
+	private DefaultTableModel t1 = new DefaultTableModel() {
+		public boolean isCellEditable(int row, int column) {
+	        return false;
+		}
+	};
 	private String[] zutabeak = new String[6];
 
 	private final JButton btnInsert = new JButton("Insert"), btnUpdate = new JButton("Update"),
@@ -63,6 +68,7 @@ public class Leiho2LangileKudeaketa extends JFrame {
 		taula = new JTable();
 		taula.setBorder(null);
 		taulaFormatua();
+		//taula.setEditingRow(false);
 		taula.getTableHeader().setReorderingAllowed(false);
 		scrollPane.setViewportView(taula);
 
@@ -104,15 +110,6 @@ public class Leiho2LangileKudeaketa extends JFrame {
 		btnInsert.setForeground(Color.BLACK);
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * Langilea langile = new Langilea( t1.getValueAt(table.getSelectedRow(),
-				 * 0).toString(), t1.getValueAt(table.getSelectedRow(), 1).toString(),
-				 * t1.getValueAt(table.getSelectedRow(), 2).toString(),
-				 * t1.getValueAt(table.getSelectedRow(), 3).toString(),
-				 * t1.getValueAt(table.getSelectedRow(), 4).toString(),
-				 * t1.getValueAt(table.getSelectedRow(), 5).toString());
-				 */
-				// kontrolatzailea.MetodoakBBDD.langileTaulaAldatu(langile);
 				kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaGehituLangileak();
 			}
 		});
@@ -129,7 +126,6 @@ public class Leiho2LangileKudeaketa extends JFrame {
 							t1.getValueAt(taula.getSelectedRow(), 3).toString(),
 							t1.getValueAt(taula.getSelectedRow(), 4).toString(),
 							t1.getValueAt(taula.getSelectedRow(), 5).toString());
-					// kontrolatzailea.MetodoakBBDD.langileTaulaAldatu(langile);
 					kontrolatzailea.MetodoakLeihoAldaketa.hirugarrenLeihoaUpdateLangileak(langile);
 				} else
 					JOptionPane.showMessageDialog(null, "Hautatu lerro bat, mesedez", "Errorea", 0);

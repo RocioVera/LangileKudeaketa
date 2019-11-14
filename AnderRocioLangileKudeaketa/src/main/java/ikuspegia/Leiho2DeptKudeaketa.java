@@ -27,7 +27,11 @@ public class Leiho2DeptKudeaketa extends JFrame {
 	private JTable taula;
 	private JLabel lblDepartamentuKudeaketa = new JLabel("Departamentu Kudeaketa");
 	private JScrollPane scrollPane = new JScrollPane();
-	private DefaultTableModel t1 = new DefaultTableModel();
+	private DefaultTableModel t1 = new DefaultTableModel() {
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+	};
 	private String[] zutabeak = new String[6];
 
 	private final JButton btnInsert = new JButton("Insert"), btnUpdate = new JButton("Update"),
