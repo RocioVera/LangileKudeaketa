@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Langileak" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7eebaa4-068b-407f-bf7a-d4c2e72a1292">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM LANGILEAK]]>
+	</queryString>
+	<field name="NAN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NAN"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<field name="IZENA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IZENA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<field name="ABIZENAK" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ABIZENAK"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<field name="ARDURA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ARDURA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<field name="ARDURADUNA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ARDURADUNA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<field name="ALTA_DATA" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="ALTA_DATA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<field name="DEPARTAMENTUAK_DEPART_KOD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEPARTAMENTUAK_DEPART_KOD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="langileak"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="202" y="10" width="166" height="33" uuid="3eb8e1ab-7e38-4368-89db-62b6501a8c67"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[LANGILEAK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="230" y="50" width="116" height="22" uuid="0b5308cc-82cf-49a0-8011-6f875d4c5e32"/>
+				<text><![CDATA[TXOSTENA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="d69c6691-e92e-45c5-bf2d-c1dc15dabb91"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="79" height="15" uuid="210fed9a-4cd1-45ee-9504-cd8c005e70d3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c011a12e-4944-4e84-93d3-23b1802bf05d"/>
+				</reportElement>
+				<text><![CDATA[NAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="79" y="19" width="79" height="15" uuid="5b32206b-1271-40f7-8f4d-d13bae3f09b5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3df10358-050e-4630-a572-617cb36a8696"/>
+				</reportElement>
+				<text><![CDATA[IZENA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="158" y="19" width="79" height="15" uuid="faba2097-a1b7-4db8-98b7-cb8e053634aa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c6c2820-540c-4b65-9122-e8f983488fbb"/>
+				</reportElement>
+				<text><![CDATA[ABIZENAK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="237" y="19" width="79" height="15" uuid="68609e2e-935e-47f7-ae7f-61c393bf0ff0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b9429d15-ccf8-418c-a318-1d01fdabe142"/>
+				</reportElement>
+				<text><![CDATA[ARDURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="316" y="19" width="79" height="15" uuid="4bca1f5e-41ba-463b-b1b6-32845d8306f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c47958d0-2974-4c84-aa9e-7a1255c47e53"/>
+				</reportElement>
+				<text><![CDATA[ARDURADUNA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="395" y="19" width="79" height="15" uuid="9b0412ef-ec93-4482-b5ae-d638166fb6c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="552519d8-fbc6-4b57-8e8b-dbe9db9ef056"/>
+				</reportElement>
+				<text><![CDATA[ALTA_DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="474" y="19" width="79" height="15" uuid="01202b9c-e1c9-46df-8c61-4be70997345f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e42b822e-3331-4614-8037-76d1c694a92d"/>
+				</reportElement>
+				<text><![CDATA[DEPARTAMENTUAK_DEPART_KOD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="f367c019-9cb7-431c-8713-5a96f9b889aa"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="79" height="15" uuid="0b889977-cbb6-4797-9053-8e64a57b77fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c011a12e-4944-4e84-93d3-23b1802bf05d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{NAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="79" y="0" width="79" height="15" uuid="ef0ed673-5575-407e-98d5-8e50cadcdbf4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3df10358-050e-4630-a572-617cb36a8696"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{IZENA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="158" y="0" width="79" height="15" uuid="6855c97f-0cc8-43d4-a76b-b0b39f4c6e6c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c6c2820-540c-4b65-9122-e8f983488fbb"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ABIZENAK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="237" y="0" width="79" height="15" uuid="e2e10a9e-f2be-40e8-9d0f-ac70d91b2ac4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b9429d15-ccf8-418c-a318-1d01fdabe142"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ARDURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="316" y="0" width="79" height="15" uuid="355a885d-1bd4-494b-84fd-88e7e35766da">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c47958d0-2974-4c84-aa9e-7a1255c47e53"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ARDURADUNA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="395" y="0" width="79" height="15" uuid="a304df43-b33e-45c5-a5b9-22f8067dae68">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="552519d8-fbc6-4b57-8e8b-dbe9db9ef056"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ALTA_DATA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="474" y="0" width="79" height="15" uuid="cf2427a8-b0ee-4be2-9110-ebbdcec32d9a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e42b822e-3331-4614-8037-76d1c694a92d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{DEPARTAMENTUAK_DEPART_KOD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="02519f40-8679-4e40-a1f1-699bc025a206"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="6f13e17d-4b46-4ede-ab63-9d2685ec9c16"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="6857db7e-824a-4cda-b8dc-fe5c95aca145"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="ef9fc35f-c45f-4ec6-a5cc-ec2020109ea7"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
