@@ -32,7 +32,6 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 	private JComboBox jcbDeptKod, jcbArdura;
 	private JButton btnGorde, btnEzeztatu, btnKargatuFitxategia;
 	private ArrayList<String> ardura, deptKod;
-	private final static Logger logger = Logger.getLogger(Leiho3LangileKudeaketa_Gehitu.class);
 
 	public Leiho3LangileKudeaketa_Gehitu() {
 		// panelaren propietateak
@@ -64,7 +63,6 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 				String cadena = letraNan + "";
 				if (txtNan.getText().length() > 8 || !cadena.matches("[0-9A-Z]")) {
 					e.consume(); // ez du godetzen
-					logger.info("Langilea gehitzerakoan NAN lekuan: " + e +" sartu du.");
 				}
 			}
 		});
@@ -86,7 +84,6 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 				String cadena = letraIzena + "";
 				if (txtIzena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
 					e.consume(); // ez du godetzen
-				logger.info("Langilea gehitzerakoan izena lekuan: " + e +" sartu du.");
 			}
 
 			}
@@ -109,7 +106,6 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 				String cadena = letraAbizena + "";
 				if (txtAbizena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
 					e.consume(); // ez du godetzen
-				logger.info("Langilea gehitzerakoan abizena lekuan: " + e +" sartu du.");
 			}
 
 			}
@@ -144,7 +140,6 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 				String cadena = letraArduraduna + "";
 				if (txtArduraduna.getText().length() > 8 || !cadena.matches("[0-9A-Z]")) {
 					e.consume(); // ez du godetzen
-				logger.info("Langilea gehitzerakoan arguraduna lekuan: " + e +" sartu du.");
 			}
 			}
 		});

@@ -35,7 +35,6 @@ public class Leiho3DeptKudeaketa_Update extends JFrame {
 	private JTextField txtIzena, txtIrakKop;
 	private JButton btnKargatuFitxategia, btnEzeztatu, btnGorde, btnTxostenakSortu;
 	private JComboBox jcbKokapena, jcbEraikuntzaZbk;
-	final static Logger logger = Logger.getLogger(Leiho2LangileKudeaketa.class);
 	private JTextField txtDeptKod;
 	
 
@@ -85,7 +84,6 @@ public class Leiho3DeptKudeaketa_Update extends JFrame {
 				String cadena = letraIzena + "";
 				if (txtIzena.getText().length() > 45 || !cadena.matches("[a-zA-Z]")) {
 					e.consume(); // ez du godetzen
-					logger.info("Departamentu izena lekuan: " + e + " sartu du.");
 				}
 			}
 		});
@@ -173,7 +171,6 @@ public class Leiho3DeptKudeaketa_Update extends JFrame {
 				String cadena = letraIrakKop + "";
 				if (txtIrakKop.getText().length() > 2 || !cadena.matches("[0-9]")) {
 					e.consume(); // ez du godetzen
-					logger.info("Departamentuaren irakasle kopuruan: " + e + " sartu du.");
 				}
 
 			}
