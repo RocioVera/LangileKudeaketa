@@ -16,9 +16,9 @@ public class Jasper {
 
 	public static void sortuPdf() throws JRException, SQLException {
 // DEPARTAMENTUA
-		Konexioa con1 = new Konexioa();
+		
 
-		JasperPrint jasperPrint = JasperFillManager.fillReport("src\\main\\java\\fitxategia\\Departamentua.jasper", null,
+		JasperPrint jasperPrint = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Departamentuak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JRPdfExporter exp = new JRPdfExporter();
 
@@ -29,12 +29,12 @@ public class Jasper {
 		exp.exportReport();
 
 		// se muestra en una ventana aparte para su descarga
-		JasperPrint jasperPrintWindow = JasperFillManager.fillReport("src\\main\\java\\fitxategia\\Departamentua.jasper", null,
+		JasperPrint jasperPrintWindow = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Departamentuak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
 		jasperViewer.setVisible(true);
-
-	/*	JasperPrint jasperPrint2 = JasperFillManager.fillReport("src\\main\\java\\fitxategia\\Langileak.jasper", null,
+		
+		JasperPrint jasperPrint2 = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Langileak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JRPdfExporter exp2 = new JRPdfExporter();
 		exp2.setExporterInput(new SimpleExporterInput(jasperPrint));
@@ -44,9 +44,10 @@ public class Jasper {
 		exp2.exportReport();
 
 		// se muestra en una ventana aparte para su descarga
-		JasperPrint jasperPrintWindow2 = JasperFillManager.fillReport("..src\\main\\java\\fitxategia\\Langileak.jasper", null,
+		JasperPrint jasperPrintWindow2 = JasperFillManager.fillReport("../AnderRocioLangileKudeaketa/src/main/java/fitxategiak/Langileak.jasper", null,
 				DriverManager.getConnection("jdbc:mysql://localhost/elorrieta_errekamari", "root", ""));
 		JasperViewer jasperViewer2 = new JasperViewer(jasperPrintWindow2);
-		jasperViewer2.setVisible(true);*/
+		jasperViewer2.setVisible(true);
+		
 	}
 }
