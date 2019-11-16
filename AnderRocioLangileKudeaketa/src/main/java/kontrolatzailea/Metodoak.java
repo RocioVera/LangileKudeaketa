@@ -9,13 +9,13 @@ public class Metodoak {
 	
 	public static ArrayList<String> arrayListArduraSortu() {
 		ArrayList<String> ardura = new ArrayList<String>();
-		ardura.add("tutorea");
-		ardura.add("irakaslea");
-		ardura.add("idazkaria");
-		ardura.add("atezaina");
-		ardura.add("irakaslea");
-		ardura.add("zuzendaria");
-		ardura.add("mintegi-burua");
+		ardura.add("TUTOREA");
+		ardura.add("IRAKASLEA");
+		ardura.add("IDAZKARIA");
+		ardura.add("ATEZAINA");
+		ardura.add("IRAKASLEA");
+		ardura.add("ZUZENDARIA");
+		ardura.add("MINTEGI-BURUA");
 		return ardura;	
 	}
 	

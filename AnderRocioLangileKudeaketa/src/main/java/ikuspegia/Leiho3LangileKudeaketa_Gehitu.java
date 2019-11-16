@@ -25,11 +25,11 @@ import kontrolatzailea.*;
 public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField txtNan, txtIzena, txtAbizena, txtArduraduna;
+	private JTextField txtNan, txtIzena, txtAbizena;
 	private JLabel lblArdura, lblArduraduna, lblNan, lblIzena, lblabizenak, lblDepartamentuKodea, lblDerrigorrezNan,
 			lblDerrigorrezIzena, lblDerrigorrezAbizenak, lblDerrigorrezDeptKod, lblDerrigorrezArdurana,
 			lblLanarenDatuak, lblLangileDatuak, lblDerrigorrezArdura;
-	private JComboBox jcbDeptKod, jcbArdura;
+	private JComboBox jcbDeptKod, jcbArdura, jcbArduraduna;
 	private JButton btnGorde, btnEzeztatu, btnKargatuFitxategia;
 	private ArrayList<String> ardura, deptKod;
 
@@ -56,14 +56,13 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		getContentPane().add(lblNan);
 
 		txtNan = new JTextField();
-		txtNan.setBounds(41, 61, 124, 27);
+		txtNan.setBounds(41, 61, 228, 27);
 		txtNan.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char letraNan = e.getKeyChar();
 				String cadena = letraNan + "";
-				if (txtNan.getText().length() > 8 || !cadena.matches("[0-9A-Z]")) {
+				if (txtNan.getText().length() > 8 || !cadena.matches("[0-9A-Z]"))
 					e.consume(); // ez du godetzen
-				}
 			}
 		});
 		txtNan.setColumns(10);
@@ -77,15 +76,13 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 
 		txtIzena = new JTextField();
 		txtIzena.setColumns(10);
-		txtIzena.setBounds(41, 128, 124, 27);
+		txtIzena.setBounds(41, 128, 228, 27);
 		txtIzena.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char letraIzena = e.getKeyChar();
 				String cadena = letraIzena + "";
-				if (txtIzena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
+				if (txtIzena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]"))
 					e.consume(); // ez du godetzen
-			}
-
 			}
 		});
 		getContentPane().add(txtIzena);
@@ -104,10 +101,8 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 			public void keyTyped(KeyEvent e) {
 				char letraAbizena = e.getKeyChar();
 				String cadena = letraAbizena + "";
-				if (txtAbizena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]")) {
+				if (txtAbizena.getText().length() > 44 || !cadena.matches("[a-zA-Z ]"))
 					e.consume(); // ez du godetzen
-			}
-
 			}
 		});
 		getContentPane().add(txtAbizena);
@@ -130,27 +125,12 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		lblArduraduna.setBounds(41, 408, 143, 27);
 		getContentPane().add(lblArduraduna);
 
-		txtArduraduna = new JTextField();
-		txtArduraduna.setForeground(Color.BLACK);
-		txtArduraduna.setColumns(10);
-		txtArduraduna.setBounds(41, 442, 124, 27);
-		txtArduraduna.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				char letraArduraduna = e.getKeyChar();
-				String cadena = letraArduraduna + "";
-				if (txtArduraduna.getText().length() > 8 || !cadena.matches("[0-9A-Z]")) {
-					e.consume(); // ez du godetzen
-			}
-			}
-		});
-		getContentPane().add(txtArduraduna);
-		txtNan.setColumns(10);
 
 		deptKod = MetodoakBBDD.departamentuKodeakAtera();
 		jcbDeptKod = new JComboBox();
 		jcbDeptKod.setForeground(Color.BLACK);
 		jcbDeptKod.setFont(new Font("Dialog", Font.PLAIN, 16));
-		jcbDeptKod.setBounds(42, 286, 307, 33);
+		jcbDeptKod.setBounds(42, 286, 309, 33);
 		for (int i = 0; i < deptKod.size(); i++) {
 			jcbDeptKod.addItem(deptKod.get(i) + "");
 		}
@@ -160,11 +140,35 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		jcbArdura = new JComboBox();
 		jcbArdura.setForeground(Color.BLACK);
 		jcbArdura.setFont(new Font("Dialog", Font.PLAIN, 16));
-		jcbArdura.setBounds(41, 358, 159, 33);
+		jcbArdura.setBounds(41, 358, 310, 33);
 		for (int i = 0; i < ardura.size(); i++) {
 			jcbArdura.addItem(ardura.get(i));
 		}
 		getContentPane().add(jcbArdura);
+		jcbArdura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jcbArduraduna.removeAllItems();	
+				if (jcbArdura.getSelectedItem().equals("ZUZENDARIA")) {
+					jcbArduraduna.addItem("");
+				} else {
+					for (int i = 0; i < kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.size(); i++) {
+						jcbArduraduna.addItem(MetodoakLeihoAldaketa.lista_langileak.get(i).getIzena() + " "+ MetodoakLeihoAldaketa.lista_langileak.get(i).getAbizenak());
+					}
+				}
+				jcbArduraduna.setSelectedIndex(0);
+			}
+		});
+		
+		
+		jcbArduraduna = new JComboBox();
+		jcbArduraduna.setForeground(Color.BLACK);
+		jcbArduraduna.setFont(new Font("Dialog", Font.PLAIN, 16));
+		jcbArduraduna.setBounds(41, 437, 310, 35);
+		for (int i = 0; i < kontrolatzailea.MetodoakLeihoAldaketa.lista_langileak.size(); i++) {
+			jcbArduraduna.addItem(MetodoakLeihoAldaketa.lista_langileak.get(i).getIzena() + " "+ MetodoakLeihoAldaketa.lista_langileak.get(i).getAbizenak());
+		}
+		jcbArduraduna.setSelectedIndex(0);
+		getContentPane().add(jcbArduraduna);
 
 		// mezuak
 		lblDepartamentuKodea = new JLabel("Departamentu kodea");
@@ -213,16 +217,25 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 				else
 					lblDerrigorrezNan.setText("*");
 
-				if (!txtArduraduna.getText().matches("\\d{8}+[A-Z]{1}"))
-					lblDerrigorrezArdurana.setText("* Lehenengo 8 karaktereak zenbakiak eta azkena letra larria");
-				else
-					lblDerrigorrezArdurana.setText("*");
-
 				if (txtNan.getText().matches("\\d{8}+[A-Z]{1}") && !txtIzena.getText().matches("[a-zA-Z ]")
-						&& txtArduraduna.getText().matches("\\d{8}+[A-Z]{1}")
 						&& !txtAbizena.getText().matches("[a-zA-Z ]")) {
-					Langilea langile = new Langilea(txtNan.getText()+"",txtIzena.getText()+"", txtAbizena.getText()+"", jcbArdura.getSelectedItem()+"", txtArduraduna.getText()+"", jcbDeptKod.getSelectedItem()+"");					
-					kontrolatzailea.MetodoakBBDD.langileTaulaIdatzi(langile);;
+					Langilea langile;
+					if (jcbArdura.getSelectedItem() == "ZUZENDARIA") {
+						langile = new Langilea(txtNan.getText()+"",txtIzena.getText()+"", 
+								txtAbizena.getText()+"",jcbArdura.getSelectedItem()+"","", jcbDeptKod.getSelectedItem()+"");					
+						kontrolatzailea.MetodoakBBDD.langileTaulaIdatzi(langile);
+					} else {
+						String arduraduna = jcbArduraduna.getSelectedItem().toString();
+						String izenAbizenak, arduradunaNAN = null;
+						for (int i = 0; i < MetodoakLeihoAldaketa.lista_langileak.size(); i++) {
+							izenAbizenak = MetodoakLeihoAldaketa.lista_langileak.get(i).getIzena() + " " + MetodoakLeihoAldaketa.lista_langileak.get(i).getAbizenak();
+							if (arduraduna.equals(izenAbizenak))
+								arduradunaNAN = MetodoakLeihoAldaketa.lista_langileak.get(i).getNan();
+						}						
+						langile = new Langilea(txtNan.getText()+"",txtIzena.getText()+"", 
+								txtAbizena.getText()+"",jcbArdura.getSelectedItem()+"",arduradunaNAN, jcbDeptKod.getSelectedItem()+"");					
+						kontrolatzailea.MetodoakBBDD.langileTaulaIdatzi(langile);
+					}
 					//dispose();
 				}
 			}
@@ -255,6 +268,7 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		});
 		btnKargatuFitxategia.setBounds(28, 510, 212, 31);
 		getContentPane().add(btnKargatuFitxategia);
+	
 
 	}
 }

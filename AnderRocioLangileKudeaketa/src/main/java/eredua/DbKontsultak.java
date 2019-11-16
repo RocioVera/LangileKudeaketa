@@ -147,11 +147,13 @@ public class DbKontsultak {
 					"UPDATE `LANGILEAK` SET `NAN`=?,`IZENA`=?,`ABIZENAK`=?,`ARDURA`=?,`ARDURADUNA`=?,`DEPARTAMENTUAK_DEPART_KOD`=? WHERE `NAN`= '"+langile.getNan()+"'");
 			s.setString(1, langile.getNan());
 			s.setString(2, langile.getIzena());
+			System.out.println("si");
 			s.setString(3, langile.getAbizenak());
 			s.setString(4, langile.getArdura());
+			System.out.println("nooo");
 			s.setString(5, langile.getArduraduna());
 			s.setString(6, langile.getDepartamentu_kod());
-	
+			System.out.println("noseeee");
 
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
@@ -162,6 +164,7 @@ public class DbKontsultak {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ez da aldatu", "SQL Update Message", 0);
 			logger.info("Langilea DB-tik aldatzerakoan errorea");
+			System.out.println(e.getMessage());
 		}
 
 	}
