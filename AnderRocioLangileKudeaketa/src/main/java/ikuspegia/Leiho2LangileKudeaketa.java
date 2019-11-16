@@ -63,7 +63,7 @@ public class Leiho2LangileKudeaketa extends JFrame {
 		getContentPane().add(btnIrten);
 
 		scrollPane.setBorder(null);
-		scrollPane.setBounds(12, 97, 720, 299);
+		scrollPane.setBounds(12, 97, 751, 299);
 		getContentPane().add(scrollPane);
 		taula = new JTable();
 		taula.setBorder(null);

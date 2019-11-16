@@ -57,7 +57,7 @@ public class Leiho2DeptKudeaketa extends JFrame {
 		getContentPane().add(btnIrten);
 
 		scrollPane.setBorder(null);
-		scrollPane.setBounds(12, 97, 720, 299);
+		scrollPane.setBounds(12, 98, 772, 298);
 		getContentPane().add(scrollPane);
 		taula = new JTable();
 		taula.setBorder(null);

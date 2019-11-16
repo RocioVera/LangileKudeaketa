@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -239,9 +238,6 @@ public class Leiho3DeptKudeaketa_Update extends JFrame {
 		btnGorde.setFont(new Font("Dialog", Font.BOLD, 16));
 		btnGorde.setBounds(295, 490, 99, 33);
 		getContentPane().add(btnGorde);
-		
-		
-		
 
 	}
 }

@@ -212,7 +212,6 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 		lblDerrigorrezArdura = new JLabel("*");
 		lblDerrigorrezArdura.setForeground(Color.RED);
 		lblDerrigorrezArdura.setBounds(106, 333, 114, 21);
-		lblDerrigorrezArdura.setVisible(false);
 		getContentPane().add(lblDerrigorrezArdura);
 		
 		// botoiak
@@ -223,6 +222,16 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 					lblDerrigorrezNan.setText("* Lehenengo 8 karaktereak zenbakiak eta azkena letra larria");
 				else
 					lblDerrigorrezNan.setText("*");
+				
+				if (txtIzena.getText().length() == 0)
+					lblDerrigorrezIzena.setText("* Zure izena sartu");
+				else
+					lblDerrigorrezIzena.setText("*");
+
+				if (txtAbizena.getText().length() == 0)
+					lblDerrigorrezAbizenak.setText("* Zure abizenak sartu");
+				else
+					lblDerrigorrezAbizenak.setText("*");
 				
 				if (txtNan.getText().matches("\\d{8}+[A-Z]{1}") && !txtIzena.getText().matches("[a-zA-Z ]")
 						&& !txtAbizena.getText().matches("[a-zA-Z ]")) {
