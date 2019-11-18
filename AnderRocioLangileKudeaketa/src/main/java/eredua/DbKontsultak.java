@@ -82,6 +82,10 @@ public class DbKontsultak {
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
 			//konexioa.close(); // DATUBASE konexioa itxi.
+			int langTot = zenbatLangileDepartamentuan(langile.getDepartamentu_kod());
+			langTot++; 
+			departLangileTotAldatu(langile.getDepartamentu_kod(),langTot);
+
 			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Insert Message", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (Exception e) {
@@ -90,6 +94,7 @@ public class DbKontsultak {
 		}
 
 	}
+
 	public static void multiLangileTaulaIdatzi(ArrayList<Langilea> lista_langileak) {
 		PreparedStatement s = null;
 		Connection konexioa = Konexioa.getKonexioa();
@@ -129,12 +134,15 @@ public class DbKontsultak {
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
 			//konexioa.close(); // DATUBASE konexioa itxi.
+			int langTot = zenbatLangileDepartamentuan(langile.getDepartamentu_kod());
+			langTot--; 
+			departLangileTotAldatu(langile.getDepartamentu_kod(),langTot);
+			
 			JOptionPane.showMessageDialog(null, "Langilea ondo ezabatu da", "SQL Delete Message", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Langilea ez da ondo ezabatu", "SQL Delete Message", 0);
 			logger.info("Langilea DB-tik ezabatzerakoan errorea");
-
 		}
 
 	}
@@ -147,24 +155,60 @@ public class DbKontsultak {
 					"UPDATE `LANGILEAK` SET `NAN`=?,`IZENA`=?,`ABIZENAK`=?,`ARDURA`=?,`ARDURADUNA`=?,`DEPARTAMENTUAK_DEPART_KOD`=? WHERE `NAN`= '"+langile.getNan()+"'");
 			s.setString(1, langile.getNan());
 			s.setString(2, langile.getIzena());
-			System.out.println("si");
 			s.setString(3, langile.getAbizenak());
 			s.setString(4, langile.getArdura());
-			System.out.println("nooo");
 			s.setString(5, langile.getArduraduna());
 			s.setString(6, langile.getDepartamentu_kod());
-			System.out.println("noseeee");
 
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
-			//konexioa.close(); // DATUBASE konexioa itxi.
 			JOptionPane.showMessageDialog(null, "Langilea ondo aldatu da", "SQL Update Message", JOptionPane.INFORMATION_MESSAGE);
 
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ez da aldatu", "SQL Update Message", 0);
 			logger.info("Langilea DB-tik aldatzerakoan errorea");
-			System.out.println(e.getMessage());
+		}
+
+	}
+
+	private static int zenbatLangileDepartamentuan(String depart) {
+		int langTot = 0;
+		PreparedStatement s = null;
+		Connection konexioa = Konexioa.getKonexioa();
+
+		try {
+			s = konexioa.prepareStatement("SELECT IRAKASLE_KOP FROM `departamentuak` WHERE IZENA LIKE '"+depart+"'");			
+			
+			ResultSet rs = s.executeQuery();
+
+			while (rs.next()) {
+				langTot = rs.getInt(1);
+			}
+			s.close(); // PREPAREDSTATEMENT itxi
+			System.out.println(langTot);
+		} catch (Exception e) {
+			logger.info("Errorea langile kantitatea ateratzerakoan");
+		}
+		return langTot;
+	}
+ 	
+	private static void departLangileTotAldatu(String depart, int totala) {
+		PreparedStatement s = null;
+		Connection konexioa = Konexioa.getKonexioa();
+		
+		try {
+			s = konexioa.prepareStatement(
+					"UPDATE departamentuak SET IRAKASLE_KOP='"+totala+"' WHERE DEPART_KOD LIKE'"+depart+"'");
+
+			s.executeUpdate();
+			s.close(); // PREPAREDSTATEMENT itxi
+			System.out.println(totala);
+			System.out.println(depart);
+			System.out.println("departtotONDO");
+
+		} catch (Exception e) {
+			logger.info("Langile kantitatea departamentuetan aldatzerakoan errorea");
 		}
 
 	}
