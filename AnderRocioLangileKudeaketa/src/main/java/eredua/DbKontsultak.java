@@ -3,6 +3,7 @@ package eredua;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -87,7 +88,10 @@ public class DbKontsultak {
 			departLangileTotAldatu(langile.getDepartamentu_kod(),langTot);
 
 			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Insert Message", JOptionPane.INFORMATION_MESSAGE);
-
+		
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "NAN zenbakia duplikatuta", "SQL Insert Message", 0);
+			logger.info("Langileak DB idaztekorakoan taulan idazterakoan NAN zenbakia duplikatuta");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Insert Message", 0);
 			logger.info("Langileak DB idaztekorakoan errorea");
@@ -103,7 +107,6 @@ public class DbKontsultak {
 					"INSERT INTO `LANGILEAK` (`NAN`, `IZENA`, `ABIZENAK`, `ARDURA`, `ARDURADUNA`,`DEPARTAMENTUAK_DEPART_KOD`)"
 							+ " VALUES(?, ?, ?, ?, ?, ?)");
 			for (Langilea langile : lista_langileak) {
-				System.out.println(langile.getNan());
 				s.setString(1, langile.getNan());
 				s.setString(2, langile.getIzena());
 				s.setString(3, langile.getAbizenak());
@@ -111,8 +114,12 @@ public class DbKontsultak {
 				s.setString(5, langile.getArduraduna());
 				s.setString(6, langile.getDepartamentu_kod());
 				s.executeUpdate();
+				int langTot = zenbatLangileDepartamentuan(langile.getDepartamentu_kod());
+				langTot++; 
+				departLangileTotAldatu(langile.getDepartamentu_kod(), langTot);
 			}
 			s.close(); // PREPAREDSTATEMENT itxi
+
 			JOptionPane.showMessageDialog(null, "Fitxeroa ondo gehitu da", "SQL Insert Message", JOptionPane.INFORMATION_MESSAGE);
 			
 			//konexioa.close(); // DATUBASE konexioa itxi.
@@ -178,7 +185,7 @@ public class DbKontsultak {
 		Connection konexioa = Konexioa.getKonexioa();
 
 		try {
-			s = konexioa.prepareStatement("SELECT IRAKASLE_KOP FROM `departamentuak` WHERE IZENA LIKE '"+depart+"'");			
+			s = konexioa.prepareStatement("SELECT IRAKASLE_KOP FROM `departamentuak` WHERE DEPART_KOD LIKE '"+depart+"'");			
 			
 			ResultSet rs = s.executeQuery();
 
@@ -186,7 +193,6 @@ public class DbKontsultak {
 				langTot = rs.getInt(1);
 			}
 			s.close(); // PREPAREDSTATEMENT itxi
-			System.out.println(langTot);
 		} catch (Exception e) {
 			logger.info("Errorea langile kantitatea ateratzerakoan");
 		}
@@ -200,12 +206,8 @@ public class DbKontsultak {
 		try {
 			s = konexioa.prepareStatement(
 					"UPDATE departamentuak SET IRAKASLE_KOP='"+totala+"' WHERE DEPART_KOD LIKE'"+depart+"'");
-
 			s.executeUpdate();
 			s.close(); // PREPAREDSTATEMENT itxi
-			System.out.println(totala);
-			System.out.println(depart);
-			System.out.println("departtotONDO");
 
 		} catch (Exception e) {
 			logger.info("Langile kantitatea departamentuetan aldatzerakoan errorea");
@@ -259,6 +261,9 @@ public class DbKontsultak {
 			s.close(); // PREPAREDSTATEMENT itxi
 			//konexioa.close(); // DATUBASE konexioa itxi.
 			JOptionPane.showMessageDialog(null, "Lerroa ondo gehitu da", "SQL Insert Message", JOptionPane.INFORMATION_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Departamentu kodea duplikatuta", "SQL Insert Message", 0);
+			logger.info("DB-ko departamentu taulara idazterakoan departamentu kodea duplikatuta");
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Insert Message", 0);

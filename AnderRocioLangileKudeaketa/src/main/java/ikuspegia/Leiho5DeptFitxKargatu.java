@@ -46,6 +46,11 @@ public class Leiho5DeptFitxKargatu extends JFrame {
 		btnIrten.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnIrten.setForeground(Color.BLACK);
 		btnIrten.setBounds(447, 493, 89, 40);
+		btnIrten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		getContentPane().add(btnIrten);
 
 		lblMota = new JLabel("Mota: ");
@@ -119,12 +124,6 @@ public class Leiho5DeptFitxKargatu extends JFrame {
 		});
 		btnHelbidea.setBounds(521, 209, 28, 23);
 		getContentPane().add(btnHelbidea);
-		
-		btnIrten.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
 
 	}
 }
