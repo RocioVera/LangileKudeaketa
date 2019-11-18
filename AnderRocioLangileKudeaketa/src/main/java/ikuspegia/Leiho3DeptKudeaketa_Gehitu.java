@@ -28,7 +28,7 @@ import kontrolatzailea.MetodoakLeihoAldaketa;
 public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblDepartKod, lblIzena, lblKokapena, lblEraikuntzaZbk, lblIrakKop, lblDepartamentuDatuak,
-			lblKokapena_1, lblBeteIzena, lblBeteIrakKop;
+			lblKokapena_1, lblBeteIzena, lblBeteIrakKop,lblBetedepart;
 	private JTextField txtIzena, txtIrakKop;
 	private JButton btnKargatuFitxategia, btnEzeztatu, btnGorde, btnTxostenakSortu;
 	private JComboBox<String> jcbKokapena, jcbEraikuntzaZbk;
@@ -173,6 +173,14 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		lblBeteIzena.setBounds(491, 122, 73, 16);
 		lblBeteIzena.setVisible(false);
 		getContentPane().add(lblBeteIzena);
+		
+		lblBetedepart = new JLabel("* Bete");
+		lblBetedepart.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblBetedepart.setForeground(Color.RED);
+		lblBetedepart.setBounds(489, 63, 73, 16);
+		lblBetedepart.setVisible(false);
+		getContentPane().add(lblBetedepart);
+
 
 		lblBeteIrakKop = new JLabel("* Bete");
 		lblBeteIrakKop.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -209,6 +217,11 @@ public class Leiho3DeptKudeaketa_Gehitu extends JFrame {
 		btnGorde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// lblBeteIzena
+				if (txtDeptKod.getText().equals(""))
+					lblBetedepart.setVisible(true);
+				else
+					lblBetedepart.setVisible(false);
+				
 				if (txtIzena.getText().equals(""))
 					lblBeteIzena.setVisible(true);
 				else

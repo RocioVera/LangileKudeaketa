@@ -46,4 +46,12 @@ public class Konexioa {
     public static Connection getKonexioa() {
         return konexioa;
     }
+    public static void itxikonexioa() {
+    	 try {
+			konexioa.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }

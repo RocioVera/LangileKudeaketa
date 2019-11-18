@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import com.mysql.jdbc.Connection;
+
+import eredua.Konexioa;
 import kontrolatzailea.MetodoakLeihoAldaketa;
 
 public class Leiho1OngiEtorria extends JFrame {
@@ -76,6 +79,7 @@ public class Leiho1OngiEtorria extends JFrame {
 		btnIrten.setBounds(446, 506, 90, 27);
 		btnIrten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Konexioa.itxikonexioa();
 				System.exit(0);
 			}
 		});
