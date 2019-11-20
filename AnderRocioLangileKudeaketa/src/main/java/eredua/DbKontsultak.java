@@ -91,6 +91,7 @@ public class DbKontsultak {
 		
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "NAN zenbakia duplikatuta", "SQL Insert Message", 0);
+			System.out.println(e.getMessage());
 			logger.info("Langileak DB idaztekorakoan taulan idazterakoan NAN zenbakia duplikatuta");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ez da gehitu", "SQL Insert Message", 0);

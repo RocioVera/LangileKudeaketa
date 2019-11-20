@@ -245,7 +245,7 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 								txtAbizena.getText()+"",jcbArdura.getSelectedItem()+"",arduradunaNAN, jcbDeptKod.getSelectedItem()+"");					
 						kontrolatzailea.MetodoakBBDD.langileTaulaIdatzi(langile);
 					}
-					//dispose();
+					dispose();
 				}
 			}
 		});
@@ -257,7 +257,7 @@ public class Leiho3LangileKudeaketa_Gehitu extends JFrame {
 		btnEzeztatu = new JButton("Ezeztatu");
 		btnEzeztatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MetodoakLeihoAldaketa.bigarrenLeihoaLang();
+				//MetodoakLeihoAldaketa.bigarrenLeihoaLang();
 				dispose();
 			}
 		});

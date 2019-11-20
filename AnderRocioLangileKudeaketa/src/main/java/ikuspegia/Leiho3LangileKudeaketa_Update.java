@@ -265,7 +265,7 @@ public class Leiho3LangileKudeaketa_Update extends JFrame {
 		btnEzeztatu = new JButton("Ezeztatu");
 		btnEzeztatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MetodoakLeihoAldaketa.bigarrenLeihoaLang();
+				//MetodoakLeihoAldaketa.bigarrenLeihoaLang();
 				dispose();
 			}
 		});
