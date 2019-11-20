@@ -1,7 +1,7 @@
 [
   {
     "DEPARTAMENTUAK": {
-	    "DEPART_KOD": "DEPT1JSON",
+	    "DEPART_KOD": "ERIZAINTZA",
 	    "IZENA": "FROGA1JSON",
 	    "KOKAPENA": "ELORRIETA",
 	    "ERAIKUNTZA_ZBK": "5",
@@ -10,7 +10,7 @@
     },
 	{
 	    "DEPARTAMENTUAK": {
-	    "DEPART_KOD": "DEPT2JSON",
+	    "DEPART_KOD": "MEDIKUNTZA",
 	    "IZENA": "FROGA2JSON",
 	    "KOKAPENA": "ERREKA-MARI",
 	    "ERAIKUNTZA_ZBK": "7",
