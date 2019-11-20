@@ -111,6 +111,8 @@ public class FitxKudeaketaDepartamentuak {
 						lista_dept.add(dept);
 					}
 				}
+				JOptionPane.showMessageDialog(null, "Ondo gehituta ", "SQL Insert Message", JOptionPane.INFORMATION_MESSAGE);
+
 			} catch (SAXException e) {
 				JOptionPane.showMessageDialog(null, "Ez duzu fitxero zuzena sartu", "ERROREA", 0);
 			} catch (IOException e) {
@@ -126,6 +128,9 @@ public class FitxKudeaketaDepartamentuak {
 		return lista_dept;
 	}
 
+	private static ArrayList<Departamentua> lista_DeptJSON = new ArrayList<Departamentua>();
+
+	
 	// .json an dauden lerroak arraylist batean sartu
 	public static ArrayList<Departamentua> irakurriDeptJSON(String helbidea) {
 		
@@ -135,27 +140,34 @@ public class FitxKudeaketaDepartamentuak {
 			Object obj = jsonParser.parse(reader);
 			JSONArray employeeList = (JSONArray) obj;
 			employeeList.forEach(emp -> parseDeptObject((JSONObject) emp));
+			if (lista_DeptJSON.size() == 0)
+				JOptionPane.showMessageDialog(null, "Ez da gehitu, fitxero desegokia", "SQL Insert Message", 0);
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ez da gehitu ", "SQL Insert Message", 0);
 		} catch (IOException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ez da gehitu ", "SQL Insert Message", 0);
 		} catch (ParseException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ez da gehitu ", "SQL Insert Message", 0);
 		}
-		return MetodoakLeihoAldaketa.lista_departamentuak;
+		return lista_DeptJSON;
 	}
 	
 	private static void parseDeptObject(JSONObject employee) {
 		JSONObject oharraObject = (JSONObject) employee.get("DEPARTAMENTUAK");
-
-		String depart_kod = (String) oharraObject.get("DEPART_KOD");
-		String izena = (String) oharraObject.get("IZENA");
-		String kokapena = (String) oharraObject.get("KOKAPENA");
-		String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
-		String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
-
-		Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-		MetodoakLeihoAldaketa.lista_departamentuak.add(departamentua);
+		if (oharraObject != null) {
+			String depart_kod = (String) oharraObject.get("DEPART_KOD");
+			String izena = (String) oharraObject.get("IZENA");
+			String kokapena = (String) oharraObject.get("KOKAPENA");
+			String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
+			String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
+	
+			Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
+			lista_DeptJSON.add(departamentua);
+		}
 	}
 	
 	

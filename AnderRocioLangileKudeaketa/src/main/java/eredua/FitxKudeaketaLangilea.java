@@ -84,6 +84,7 @@ public class FitxKudeaketaLangilea {
 				}
 				br.close();
 				fitxeroa.close();
+
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Errorea", "Errorea", 0);
 			}
@@ -155,6 +156,8 @@ public class FitxKudeaketaLangilea {
 						lista_langilea.add(dept);
 					}
 				}
+				JOptionPane.showMessageDialog(null, "Ondo gehituta ", "SQL Insert Message", JOptionPane.INFORMATION_MESSAGE);
+
 			} catch (SAXException e) {
 				JOptionPane.showMessageDialog(null, "Ez duzu fitxero zuzena sartu", "ERROREA", 0);
 			} catch (IOException e) {
@@ -246,10 +249,12 @@ public class FitxKudeaketaLangilea {
 		}
 
 	}
+	
+	private static ArrayList<Langilea> lista_langileaJSON = new ArrayList<Langilea>();
 
 	// .json an dauden lerroak arraylist batean sartu
 	public static ArrayList<Langilea> irakurriLangileaJSON(String helbidea) {
-		
+
 		JSONParser jsonParser = new JSONParser();
 
 		try (FileReader reader = new FileReader(helbidea)) {
@@ -257,30 +262,35 @@ public class FitxKudeaketaLangilea {
 			try {
 				obj = jsonParser.parse(reader);
 			} catch (org.json.simple.parser.ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JSONArray employeeList = (JSONArray) obj;
 			employeeList.forEach(emp -> parseLangileObject((JSONObject) emp));
+			if (lista_langileaJSON.size() == 0)
+				JOptionPane.showMessageDialog(null, "Ez da gehitu, fitxero desegokia", "SQL Insert Message", 0);
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return MetodoakLeihoAldaketa.lista_langileak;
+		
+		return lista_langileaJSON;
 	}
 	
 	private static void parseLangileObject(JSONObject employee) {
-		JSONObject oharraObject = (JSONObject) employee.get("DEPARTAMENTUAK");
-
-		String depart_kod = (String) oharraObject.get("DEPART_KOD");
-		String izena = (String) oharraObject.get("IZENA");
-		String kokapena = (String) oharraObject.get("KOKAPENA");
-		String eraikuntza_zbk = (String) oharraObject.get("ERAIKUNTZA_ZBK");
-		String irakasle_kop = (String) oharraObject.get("IRAKASLE_KOP");
-
-		Departamentua departamentua = new Departamentua(depart_kod, izena, kokapena, eraikuntza_zbk, irakasle_kop);
-		MetodoakLeihoAldaketa.lista_departamentuak.add(departamentua);
+		JSONObject oharraObject = (JSONObject) employee.get("LANGILEAK");
+		if (oharraObject != null) {
+			String nan = (String) oharraObject.get("NAN");
+			String izena = (String) oharraObject.get("IZENA");
+			String abizenak = (String) oharraObject.get("ABIZENAK");
+			String ardura = (String) oharraObject.get("ARDURA");
+			String arduraduna = (String) oharraObject.get("ARDURADUNA");
+			String departKod = (String) oharraObject.get("DEPARTAMENTUAK_DEPART_KOD");
+			Langilea langilea = new Langilea(nan, izena, abizenak, ardura, arduraduna, departKod);
+			lista_langileaJSON.add(langilea);
+		}
+		
 	}
 	
 	

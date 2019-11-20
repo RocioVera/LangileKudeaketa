@@ -83,22 +83,24 @@ public class Leiho5DeptFitxKargatu extends JFrame {
 		btnKargatu = new JButton("Kargatu");
 		btnKargatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ROCIO CASA --> D:\DAM2\AccesoADatos\git\LangileKudeaketa\LangileKudeaketa\src\fitxategiak\langileak.csv
-				// ANDER CLASE -->  C:\Users\admin1\git\LangileKudeaketa\src\fitxategiak\langileak.xml
 				if ("xml".equals(comboBox.getSelectedItem().toString())) {
 					kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak = kontrolatzailea.MetodoakFitxIrakurri
 							.irakurriDeptXMLMet(fitxategia.getAbsolutePath() + "");
-					kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
+					if (kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak.size() != 0)
+						kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
 					
 				} else if ("csv".equals(comboBox.getSelectedItem().toString())) {
+					
 					kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak = kontrolatzailea.MetodoakFitxIrakurri
 							.irakurriDeptCSVMet(fitxategia.getAbsolutePath() + "");
-					kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
-					
+					if (kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak.size() != 0)
+						kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
+
 				} else if ("json".equals(comboBox.getSelectedItem().toString())) {
 					kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak = kontrolatzailea.MetodoakFitxIrakurri
 							.irakurriDeptJSONMet(fitxategia.getAbsolutePath() + "");
-					kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
+					if (kontrolatzailea.MetodoakLeihoAldaketa.lista_departamentuak.size() != 0)
+						kontrolatzailea.MetodoakBBDD.multiDeptTaulaIdatzi();
 					
 				} else {
 					System.out.println("Erroa Aukerarekin");

@@ -104,6 +104,7 @@ public class DbKontsultak {
 		PreparedStatement s = null;
 		Connection konexioa = Konexioa.getKonexioa();
 		try {
+			
 			s = konexioa.prepareStatement(
 					"INSERT INTO `LANGILEAK` (`NAN`, `IZENA`, `ABIZENAK`, `ARDURA`, `ARDURADUNA`,`DEPARTAMENTUAK_DEPART_KOD`)"
 							+ " VALUES(?, ?, ?, ?, ?, ?)");

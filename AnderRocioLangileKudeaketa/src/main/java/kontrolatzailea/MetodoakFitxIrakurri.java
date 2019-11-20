@@ -28,7 +28,6 @@ public class MetodoakFitxIrakurri {
 		eredua.FitxKudeaketaLangilea.idatziLangileakXML(lista_langileak);
 	}
 	
-	
 	public static void idatziLangileakPDFMet(ArrayList<Langilea> lista_langileak) {
 		eredua.FitxKudeaketaLangilea.idatziLangileakPDF(lista_langileak);
 	}
@@ -46,10 +45,6 @@ public class MetodoakFitxIrakurri {
 		return eredua.FitxKudeaketaDepartamentuak.irakurriDeptJSON(helbidea);
 	}
 	
-	/*public static ArrayList<Langilea> irakurriDeptJSONMet(ArrayList<Departamentua> lista_dept) {
-		return eredua.FitxKudeaketaDepartamentuak.irakurriDeptJSON(lista_dept);
-	}*/
-
 	public static void idatziDeptCSVMet(ArrayList<Departamentua> lista_dept) {
 		eredua.FitxKudeaketaDepartamentuak.idatziDeptCSV(lista_dept);
 	}
